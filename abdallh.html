@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>درگاه پرداخت | عبدالله گیمر</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Tahoma, sans-serif;
+    background: #080b18;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 15px;
+}
+
+.payment-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px 22px;
+    border-radius: 22px;
+    background: #151a30;
+    border: 1px solid #343b61;
+    box-shadow: 0 0 35px #713cff30;
+    text-align: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #a78bfa;
+}
+
+h2 {
+    margin-top: 15px;
+}
+
+.amount {
+    background: #222943;
+    padding: 18px;
+    border-radius: 14px;
+    margin: 22px 0;
+}
+
+.amount strong {
+    color: #22d3ee;
+    font-size: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #444b70;
+    background: #0c1123;
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg,#7c3aed,#06b6d4);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.notice {
+    color: #fbbf24;
+    font-size: 12px;
+    line-height: 2;
+    margin-top: 18px;
+}
+
+#message {
+    margin-top: 15px;
+    color: #22d3ee;
+    line-height: 2;
+}
+</style>
+</head>
+
+<body>
+
+<div class="payment-box">
+
+    <div class="logo">ABDOLLAH GAMER</div>
+
+    <h2>درگاه پرداخت</h2>
+
+    <div class="amount">
+        مبلغ قابل پرداخت<br>
+        <strong>۵۰٬۰۰۰ تومان</strong>
+    </div>
+
+    <p>این صفحه فقط برای نمایش و آزمایش طراحی شده است.</p>
+
+    <button onclick="demoPayment()">
+        ادامه پرداخت نمایشی
+    </button>
+
+    <div id="message"></div>
+
+    <div class="notice">
+        ⚠️ این درگاه واقعی نیست و هیچ پرداختی انجام نمی‌دهد.
+    </div>
+
+</div>
+
+<script>
+function demoPayment() {
+    document.getElementById("message").innerHTML =
+    "✅ این یک پرداخت آزمایشی است.<br>هیچ پولی جابه‌جا نشده است.";
+}
+</script>
+
+</body>
+</html>
