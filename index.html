@@ -3,12 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>عبدالله گیمر | ABDOLLAH GAMER</title>
-
-<link href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<style>
+<title>عبدالله گیمر | ABDOLLAH GAMER</title><link href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><style>
 * {
     margin: 0;
     padding: 0;
@@ -208,7 +204,7 @@ header {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
+    border-radius: 15px;
 }
 
 .details {
@@ -235,4 +231,189 @@ header {
     font-weight: bold;
     background: linear-gradient(135deg,#7c5cff,#5540d8);
     color: white;
-    transition:
+    transition: .3s;
+}
+
+.btn:hover {
+    box-shadow: 0 0 18px #7c5cff80;
+    transform: translateY(-2px);
+}
+
+.download {
+    background: linear-gradient(135deg,#19b981,#0f9f71);
+}
+
+.telegram {
+    background: linear-gradient(135deg,#17b6d4,#087f9d);
+}
+
+.hidden {
+    display: none !important;
+}
+
+footer {
+    text-align: center;
+    padding: 35px 15px;
+    margin-top: 50px;
+    border-top: 1px solid #ffffff15;
+    color: #a8aec7;
+    font-size: 13px;
+}
+
+footer strong {
+    color: #7c5cff;
+}
+</style></head><body><header>
+    <div class="header">
+        <div class="logo">
+            👑 ABDOLLAH <span>GAMER</span>
+        </div>
+        <a href="#channels" class="header-btn">
+            ارتباط با ما
+        </a>
+    </div>
+</header><section class="hero">
+    <h1>🔥 عبدالله گیمر 🎮</h1>
+    <p>به سایت رسمی عبدالله گیمر خوش آمدید</p><div class="search-box">
+    <input
+        type="text"
+        id="search"
+        placeholder="🔍 جستجوی برنامه، ربات و پروژه..."
+        oninput="searchItems()">
+</div>
+
+</section><nav class="nav">
+    <button class="active" onclick="filterItems('all',this)">🏠 همه</button>
+    <button onclick="filterItems('store',this)">🛒 فروشگاه</button>
+    <button onclick="filterItems('channels',this)">📺 کانال‌ها</button>
+    <button onclick="filterItems('sites',this)">🌐 سایت‌ها</button>
+    <button onclick="filterItems('apps',this)">📱 برنامه‌ها</button>
+    <button onclick="filterItems('bots',this)">🤖 ربات‌ها</button>
+    <button onclick="filterItems('projects',this)">📁 پروژه‌ها</button>
+</nav><main class="container"><h2 class="section-title">🛒 فروشگاه</h2>
+
+<div class="cards">
+    هنوز هیچ محصولی وجود ندارد
+</div>
+
+<h2 class="section-title" id="channels">📺 کانال‌های ما</h2>
+
+<div class="cards">
+
+    <div class="card item" data-category="channels">
+        <div class="icon">📢</div>
+        <div class="details">
+            <h3>کانال روبیکا</h3>
+            <p>عضویت در کانال رسمی عبدالله گیمر</p>
+            <a href="https://rubika.ir/YOUR_CHANNEL" class="btn telegram" target="_blank">
+                ورود به کانال
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<h2 class="section-title">🌐 سایت‌های ما</h2>
+
+<div class="cards">
+
+    <div class="card item" data-category="sites">
+        <div class="icon">🌐</div>
+        <div class="details">
+            <h3>سایت دوم ما</h3>
+            <p>ورود به سایت دیگر عبدالله گیمر</p>
+            <a href="https://example.com" class="btn" target="_blank">
+                ورود به سایت
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<h2 class="section-title">📱 برنامه‌ها</h2>
+
+<div class="cards">
+
+    <div class="card item" data-category="apps">
+        <div class="icon">📲</div>
+        <div class="details">
+            <h3>اپچه</h3>
+            <p>دانلود اپچه</p>
+            <a href="https://dl.studioag.ir/app/Appche(studioag.ir).apk" class="btn download" download>
+                <i class="fa fa-download"></i>
+                دانلود
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<h2 class="section-title">🤖 ربات‌های ما</h2>
+
+<div class="cards">
+
+    <div class="card item" data-category="bots">
+
+        <div class="icon">
+            <img src="aibi-pocket-pet-ai-living.jpg" alt="ربات عبدالله گیمر">
+        </div>
+
+        <div class="details">
+            <h3>ربات عبدالله گیمر</h3>
+            <p>ربات رسمی ما</p>
+            <a href="https://rubika.ir/abdallh_gamer_robot" class="btn">
+                ورود به ربات
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<h2 class="section-title">📁 پروژه‌های ما</h2>
+
+<div class="cards">
+    پروژه‌ای وجود ندارد
+</div>
+
+</main><footer>
+    <h3>👑 ABDOLLAH GAMER</h3>
+    <p>ساخته شده با ❤️ برای عبدالله گیمر</p>
+    <br>
+    © تمامی حقوق محفوظ است.
+</footer><script>
+function filterItems(category,button) {
+
+    document.querySelectorAll('.nav button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    button.classList.add('active');
+
+    document.querySelectorAll('.item').forEach(item => {
+        if(category === 'all' || item.dataset.category === category) {
+            item.classList.remove('hidden');
+        } else {
+            item.classList.add('hidden');
+        }
+    });
+
+    document.getElementById('search').value = '';
+}
+
+function searchItems() {
+
+    let search = document.getElementById('search').value.toLowerCase();
+
+    document.querySelectorAll('.item').forEach(item => {
+        let text = item.innerText.toLowerCase();
+
+        if(text.includes(search)) {
+            item.classList.remove('hidden');
+        } else {
+            item.classList.add('hidden');
+        }
+    });
+}
+</script></body>
+</html>
