@@ -4,137 +4,304 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>سایت‌ساز عبدالله گیمر</title>
-
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;
- background:#090b18;
- color:white;
- font-family:Tahoma,sans-serif;
+ margin:0;background:#090d1b;color:white;
+ font-family:Tahoma,sans-serif
 }
 header{
- padding:22px;
- text-align:center;
- background:#17152e;
- border-bottom:2px solid #805cff;
+ background:#151b31;padding:20px;text-align:center;
+ border-bottom:2px solid #805cff
 }
-header h2{color:#a68aff}
-.container{
- max-width:950px;
- margin:auto;
- padding:18px;
-}
+header h2{color:#a58aff}
+.container{max-width:1100px;margin:auto;padding:15px}
 .panel{
- background:#15172b;
- border:1px solid #343354;
- padding:20px;
- border-radius:17px;
- margin-bottom:20px;
+ background:#151b31;border:1px solid #343c5d;
+ border-radius:15px;padding:18px;margin-bottom:18px
 }
-h3{color:#a68aff}
-label{
- display:block;
- margin:15px 0 8px;
-}
+h3{color:#a58aff}
+label{display:block;margin:13px 0 7px;font-size:13px}
 input,textarea,select{
- width:100%;
- padding:13px;
- border-radius:10px;
- border:1px solid #414166;
- background:#090b18;
- color:white;
- font-family:inherit;
+ width:100%;padding:12px;border-radius:9px;
+ background:#090e20;border:1px solid #39415f;
+ color:white;font-family:inherit
 }
-textarea{height:110px;resize:vertical}
+textarea{min-height:100px}
 button{
- border:0;
- padding:13px 17px;
- border-radius:10px;
- background:#805cff;
- color:white;
- font-weight:bold;
- cursor:pointer;
- margin-top:12px;
+ background:#805cff;color:white;border:0;
+ padding:12px 16px;border-radius:9px;
+ margin:5px;cursor:pointer;font-weight:bold
 }
-button:hover{opacity:.8}
+.green{background:#109b70}
+.gray{background:#34415e}
+.tabs{display:flex;flex-wrap:wrap}
 .preview{
- background:white;
- color:#222;
- min-height:250px;
- padding:20px;
- border-radius:12px;
+ background:white;border-radius:12px;
+ overflow:hidden
 }
-.actions{
- display:flex;
- gap:10px;
- flex-wrap:wrap;
+iframe{width:100%;height:450px;border:0}
+#code{
+ direction:ltr;text-align:left;
+ font-family:monospace;height:350px
 }
+small{color:#aeb6ce}
 </style>
 </head>
-
 <body>
 
 <header>
 <h2>👑 ABDOLLAH GAMER</h2>
-<p>سایت‌ساز اختصاصی عبدالله گیمر</p>
+<p>سایت‌ساز آنلاین و رایگان</p>
 </header>
 
 <div class="container">
 
 <div class="panel">
-<h3>🛠️ ساخت صفحه جدید</h3>
+<h3>🛠️ طراحی سایت</h3>
 
-<label>نام فایل (انگلیسی)</label>
-<input id="filename" placeholder="مثلاً game">
+<label>نام فایل انگلیسی</label>
+<input id="filename" value="my-page">
 
-<label>عنوان صفحه</label>
-<input id="title" placeholder="عنوان سایت">
+<label>عنوان سایت</label>
+<input id="title" value="به سایت من خوش آمدید">
 
 <label>توضیحات</label>
-<textarea id="description" placeholder="متن توضیحات..."></textarea>
+<textarea id="description">این سایت با سایت‌ساز عبدالله گیمر ساخته شده است.</textarea>
 
-<label>آدرس تصویر</label>
-<input id="image" placeholder="https://example.com/image.jpg">
+<label>انتخاب تصویر</label>
+<input type="file" id="photo" accept="image/*">
 
 <label>متن دکمه</label>
-<input id="buttonText" placeholder="ورود به سایت">
+<input id="btnText" value="ورود به سایت">
 
 <label>لینک دکمه</label>
-<input id="buttonLink" placeholder="https://example.com">
+<input id="btnLink" value="https://example.com">
 
 <label>رنگ پس‌زمینه</label>
-<input type="color" id="background" value="#101225">
+<input type="color" id="bg" value="#10152b">
 
 <label>رنگ عنوان</label>
 <input type="color" id="color" value="#805cff">
 
-<div class="actions">
-<button onclick="preview()">👁️ پیش‌نمایش</button>
-<button onclick="downloadPage()">⬇️ دریافت فایل HTML</button>
+<div class="tabs">
+<button onclick="update()">👁️ پیش‌نمایش</button>
+<button class="green" onclick="downloadHTML()">دانلود HTML</button>
+<button class="gray" onclick="saveJSON()">ذخیره JSON</button>
+<button class="gray" onclick="document.getElementById('jsonFile').click()">بازکردن JSON</button>
+<input type="file" id="jsonFile" accept=".json" hidden>
+</div>
+
+</div>
+
+<div class="panel">
+<h3>⌨️ ویرایشگر HTML</h3>
+<textarea id="code" dir="ltr" spellcheck="false"></textarea>
+<button onclick="runCode()">اجرای کد</button>
+<button class="green" onclick="downloadCode()">دانلود کد ویرایش‌شده</button>
+</div>
+
+<div class="panel">
+<h3>🌐 پیش‌نمایش سایت</h3>
+<div class="preview">
+<iframe id="frame" sandbox="allow-forms allow-popups"></iframe>
 </div>
 </div>
 
 <div class="panel">
-<h3>👁️ پیش‌نمایش صفحه</h3>
-<div class="preview" id="preview">
-صفحه ساخته‌شده اینجا نمایش داده می‌شود.
-</div>
-</div>
-
-<div class="panel">
-<h3>🌐 آدرس صفحه</h3>
-<p id="address">abdallhgamer.github.io/نام.html</p>
+<h3>🔗 آدرس پیشنهادی صفحه</h3>
+<p id="address">abdallhgamer.github.io/my-page.html</p>
+<small>پس از آپلود فایل HTML در مخزن GitHub، این آدرس قابل استفاده خواهد بود.</small>
 </div>
 
 </div>
 
 <script>
+let imageData="";
 
-function getData(){
+const $=id=>document.getElementById(id);
 
-let filename=document.getElementById('filename').value.trim();
-filename=filename.replace(/[^a-zA-Z0-9_-]/g,'');
+function esc(s){
+return String(s).replace(/[&<>"']/g,c=>({
+'&':'&amp;','<':'&lt;','>':'&gt;',
+'"':'&quot;',"'":'&#39;'
+}[c]));
+}
 
-if(!filename){
-alert
+function safeLink(s){
+try{
+let u=new URL(s);
+return ['https:','http:'].includes(u.protocol)?u.href:'';
+}catch(e){return ''}
+}
+
+function filename(){
+return $('filename').value.trim()
+.replace(/\.html$/i,'')
+.replace(/[^a-zA-Z0-9_-]/g,'-') || 'my-page';
+}
+
+function makeHTML(){
+
+let title=$('title').value;
+let description=$('description').value;
+let image=imageData;
+let buttonText=$('btnText').value;
+let buttonLink=safeLink($('btnLink').value);
+let bg=$('bg').value;
+let color=$('color').value;
+
+return `<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(title)}</title>
+<style>
+body{
+background:${bg};
+color:white;
+font-family:Tahoma,sans-serif;
+text-align:center;
+padding:30px;
+}
+main{
+max-width:700px;
+margin:50px auto;
+padding:25px;
+background:#ffffff10;
+border-radius:20px;
+}
+h1{color:${color}}
+p{line-height:2}
+img{
+max-width:100%;
+max-height:350px;
+border-radius:15px;
+}
+a{
+display:inline-block;
+padding:13px 22px;
+background:${color};
+color:white;
+text-decoration:none;
+border-radius:10px;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>${esc(title)}</h1>
+${image?'<img src="'+image+'" alt="'+esc(title)+'">':''}
+<p>${esc(description).replace(/\n/g,'<br>')}</p>
+${buttonText&&buttonLink?
+'<a href="'+esc(buttonLink)+'">'+esc(buttonText)+'</a>':''}
+</main>
+</body>
+</html>`;
+}
+
+function update(){
+let html=makeHTML();
+$('code').value=html;
+$('frame').srcdoc=html;
+$('address').textContent=
+'abdallhgamer.github.io/'+filename()+'.html';
+}
+
+function downloadFile(content,name,type){
+let blob=new Blob([content],{type:type});
+let url=URL.createObjectURL(blob);
+let a=document.createElement('a');
+a.href=url;
+a.download=name;
+a.click();
+setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function downloadHTML(){
+downloadFile(makeHTML(),filename()+'.html','text/html;charset=utf-8');
+}
+
+function runCode(){
+$('frame').srcdoc=$('code').value;
+}
+
+function downloadCode(){
+downloadFile($('code').value,filename()+'.html','text/html;charset=utf-8');
+}
+
+function saveJSON(){
+
+let data={
+filename:filename(),
+title:$('title').value,
+description:$('description').value,
+image:imageData,
+buttonText:$('btnText').value,
+buttonLink:$('btnLink').value,
+bg:$('bg').value,
+color:$('color').value
+};
+
+downloadFile(
+JSON.stringify(data,null,2),
+filename()+'.json',
+'application/json'
+);
+}
+
+$('jsonFile').onchange=async function(e){
+
+let file=e.target.files[0];
+if(!file)return;
+
+try{
+let data=JSON.parse(await file.text());
+
+$('filename').value=data.filename||'my-page';
+$('title').value=data.title||'';
+$('description').value=data.description||'';
+$('btnText').value=data.buttonText||'';
+$('btnLink').value=data.buttonLink||'';
+$('bg').value=data.bg||'#10152b';
+$('color').value=data.color||'#805cff';
+imageData=data.image||'';
+
+update();
+alert('پروژه با موفقیت باز شد');
+
+}catch(e){
+alert('فایل JSON معتبر نیست');
+}
+
+e.target.value='';
+};
+
+$('photo').onchange=function(e){
+
+let file=e.target.files[0];
+if(!file)return;
+
+if(!file.type.startsWith('image/')||file.size>2*1024*1024){
+alert('تصویر باید کمتر از ۲ مگابایت باشد');
+return;
+}
+
+let reader=new FileReader();
+
+reader.onload=function(){
+imageData=reader.result;
+update();
+};
+
+reader.readAsDataURL(file);
+};
+
+$('filename').oninput=update;
+
+update();
+
+</script>
+</body>
+</html>
