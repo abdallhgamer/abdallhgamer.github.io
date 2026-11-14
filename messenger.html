@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABDOLLAH GAMER MESSENGER</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+background:#0b1020;
+color:white;
+font-family:Tahoma;
+}
+header{
+background:#151f38;
+padding:20px;
+text-align:center;
+color:#00e5ff;
+font-weight:bold;
+}
+.container{
+max-width:500px;
+margin:auto;
+padding:15px;
+}
+.box{
+background:#17233d;
+padding:18px;
+border-radius:14px;
+margin-top:15px;
+}
+input{
+width:100%;
+padding:13px;
+margin:7px 0;
+border:0;
+border-radius:8px;
+background:#263653;
+color:white;
+}
+button{
+width:100%;
+padding:13px;
+margin-top:8px;
+border:0;
+border-radius:8px;
+background:#00d5ff;
+font-weight:bold;
+}
+#panel{display:none}
+.item{
+background:#263653;
+padding:12px;
+border-radius:8px;
+margin:8px 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>🎮 ABDOLLAH GAMER MESSENGER</header>
+
+<div class="container">
+
+<div class="box" id="account">
+<h3>حساب کاربری</h3>
+<input id="username" placeholder="نام کاربری">
+<input id="password" type="password" placeholder="رمز عبور">
+<button onclick="register()">ثبت نام</button>
+<button onclick="login()">ورود</button>
+</div>
+
+<div id="panel">
+
+<div class="box">
+<h3 id="welcome"></h3>
+<button onclick="logout()">خروج از حساب</button>
+</div>
+
+<div class="box">
+<h3>👥 ساخت گروه</h3>
+<input id="groupName" placeholder="نام گروه">
+<button onclick="createGroup()">ساخت گروه</button>
+<div id="groups"></div>
+</div>
+
+<div class="box">
+<h3>💬 پیام گروه</h3>
+<input id="groupTarget" placeholder="نام گروه">
+<input id="message" placeholder="پیام خود را بنویسید">
+<button onclick="sendMessage()">ارسال پیام</button>
+<div id="messages"></div>
+</div>
+
+</div>
+</div>
+
+<script>
+let currentUser = "";
+
+async function getData(){
+    const response = await fetch("data.json");
+    return await response.json();
+}
+
+async function register(){
+    alert("برای ثبت حساب دائمی باید سرور متصل به data.json راه‌اندازی شود.");
+}
+
+async function login(){
+    alert("ورود واقعی پس از راه‌اندازی سرور فعال می‌شود.");
+}
+
+function logout(){
+    currentUser="";
+    account.style.display="block";
+    panel.style.display="none";
+}
+
+function createGroup(){
+    alert("ساخت گروه پس از راه‌اندازی سرور فعال می‌شود.");
+}
+
+function sendMessage(){
+    alert("ارسال پیام پس از راه‌اندازی سرور فعال می‌شود.");
+}
+</script>
+
+</body>
+</html>
