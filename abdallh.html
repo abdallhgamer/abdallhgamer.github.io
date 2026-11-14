@@ -2,132 +2,139 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>درگاه پرداخت | عبدالله گیمر</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سایت‌ساز عبدالله گیمر</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#090b18;
+ color:white;
+ font-family:Tahoma,sans-serif;
 }
-
-body {
-    margin: 0;
-    font-family: Tahoma, sans-serif;
-    background: #080b18;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 15px;
+header{
+ padding:22px;
+ text-align:center;
+ background:#17152e;
+ border-bottom:2px solid #805cff;
 }
-
-.payment-box {
-    width: 100%;
-    max-width: 400px;
-    padding: 30px 22px;
-    border-radius: 22px;
-    background: #151a30;
-    border: 1px solid #343b61;
-    box-shadow: 0 0 35px #713cff30;
-    text-align: center;
+header h2{color:#a68aff}
+.container{
+ max-width:950px;
+ margin:auto;
+ padding:18px;
 }
-
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #a78bfa;
+.panel{
+ background:#15172b;
+ border:1px solid #343354;
+ padding:20px;
+ border-radius:17px;
+ margin-bottom:20px;
 }
-
-h2 {
-    margin-top: 15px;
+h3{color:#a68aff}
+label{
+ display:block;
+ margin:15px 0 8px;
 }
-
-.amount {
-    background: #222943;
-    padding: 18px;
-    border-radius: 14px;
-    margin: 22px 0;
+input,textarea,select{
+ width:100%;
+ padding:13px;
+ border-radius:10px;
+ border:1px solid #414166;
+ background:#090b18;
+ color:white;
+ font-family:inherit;
 }
-
-.amount strong {
-    color: #22d3ee;
-    font-size: 25px;
+textarea{height:110px;resize:vertical}
+button{
+ border:0;
+ padding:13px 17px;
+ border-radius:10px;
+ background:#805cff;
+ color:white;
+ font-weight:bold;
+ cursor:pointer;
+ margin-top:12px;
 }
-
-input {
-    width: 100%;
-    padding: 14px;
-    margin: 8px 0;
-    border-radius: 10px;
-    border: 1px solid #444b70;
-    background: #0c1123;
-    color: white;
-    font-size: 15px;
-    outline: none;
+button:hover{opacity:.8}
+.preview{
+ background:white;
+ color:#222;
+ min-height:250px;
+ padding:20px;
+ border-radius:12px;
 }
-
-button {
-    width: 100%;
-    padding: 15px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(90deg,#7c3aed,#06b6d4);
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.notice {
-    color: #fbbf24;
-    font-size: 12px;
-    line-height: 2;
-    margin-top: 18px;
-}
-
-#message {
-    margin-top: 15px;
-    color: #22d3ee;
-    line-height: 2;
+.actions{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
 }
 </style>
 </head>
 
 <body>
 
-<div class="payment-box">
+<header>
+<h2>👑 ABDOLLAH GAMER</h2>
+<p>سایت‌ساز اختصاصی عبدالله گیمر</p>
+</header>
 
-    <div class="logo">ABDOLLAH GAMER</div>
+<div class="container">
 
-    <h2>درگاه پرداخت</h2>
+<div class="panel">
+<h3>🛠️ ساخت صفحه جدید</h3>
 
-    <div class="amount">
-        مبلغ قابل پرداخت<br>
-        <strong>۵۰٬۰۰۰ تومان</strong>
-    </div>
+<label>نام فایل (انگلیسی)</label>
+<input id="filename" placeholder="مثلاً game">
 
-    <p>این صفحه فقط برای نمایش و آزمایش طراحی شده است.</p>
+<label>عنوان صفحه</label>
+<input id="title" placeholder="عنوان سایت">
 
-    <button onclick="demoPayment()">
-        ادامه پرداخت نمایشی
-    </button>
+<label>توضیحات</label>
+<textarea id="description" placeholder="متن توضیحات..."></textarea>
 
-    <div id="message"></div>
+<label>آدرس تصویر</label>
+<input id="image" placeholder="https://example.com/image.jpg">
 
-    <div class="notice">
-        ⚠️ این درگاه واقعی نیست و هیچ پرداختی انجام نمی‌دهد.
-    </div>
+<label>متن دکمه</label>
+<input id="buttonText" placeholder="ورود به سایت">
+
+<label>لینک دکمه</label>
+<input id="buttonLink" placeholder="https://example.com">
+
+<label>رنگ پس‌زمینه</label>
+<input type="color" id="background" value="#101225">
+
+<label>رنگ عنوان</label>
+<input type="color" id="color" value="#805cff">
+
+<div class="actions">
+<button onclick="preview()">👁️ پیش‌نمایش</button>
+<button onclick="downloadPage()">⬇️ دریافت فایل HTML</button>
+</div>
+</div>
+
+<div class="panel">
+<h3>👁️ پیش‌نمایش صفحه</h3>
+<div class="preview" id="preview">
+صفحه ساخته‌شده اینجا نمایش داده می‌شود.
+</div>
+</div>
+
+<div class="panel">
+<h3>🌐 آدرس صفحه</h3>
+<p id="address">abdallhgamer.github.io/نام.html</p>
+</div>
 
 </div>
 
 <script>
-function demoPayment() {
-    document.getElementById("message").innerHTML =
-    "✅ این یک پرداخت آزمایشی است.<br>هیچ پولی جابه‌جا نشده است.";
-}
-</script>
 
-</body>
-</html>
+function getData(){
+
+let filename=document.getElementById('filename').value.trim();
+filename=filename.replace(/[^a-zA-Z0-9_-]/g,'');
+
+if(!filename){
+alert
