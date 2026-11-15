@@ -1,0 +1,95 @@
+* {
+  box-sizing: border-box;
+  }
+
+body {
+margin: 0;
+background: #101827;
+color: white;
+font-family: Tahoma, sans-serif;
+}
+
+header {
+background: #087f5b;
+padding: 20px;
+text-align: center;
+}
+
+header h2 {
+margin: 0 0 8px;
+}
+
+main {
+max-width: 600px;
+margin: 25px auto;
+padding: 15px;
+}
+
+section {
+background: #1d293b;
+padding: 20px;
+border-radius: 15px;
+}
+
+input {
+display: block;
+width: 100%;
+padding: 14px;
+margin: 10px 0;
+border: 1px solid #44536a;
+border-radius: 9px;
+background: #101827;
+color: white;
+}
+
+button {
+border: 0;
+padding: 12px 18px;
+margin: 5px;
+border-radius: 8px;
+background: #08a878;
+color: white;
+cursor: pointer;
+}
+
+.top {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+#messages {
+height: 350px;
+overflow-y: auto;
+background: #101827;
+padding: 12px;
+border-radius: 10px;
+}
+
+.msg {
+background: #087f5b;
+padding: 12px;
+margin: 8px 0;
+border-radius: 10px;
+overflow-wrap: anywhere;
+}
+
+.msg small {
+display: block;
+color: #d5f5e8;
+margin-bottom: 5px;
+}
+
+.send {
+display: flex;
+gap: 5px;
+margin-top: 10px;
+}
+
+.send input {
+flex: 1;
+}
+
+[hidden] {
+display: none !important;
+}
