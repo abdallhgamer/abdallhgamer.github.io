@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABDOLLAH GAMER Messenger</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header>
+    <h2>ABDOLLAH GAMER</h2>
+    <span>پیام‌رسان آنلاین</span>
+  </header>  <main>
+    <section id="auth">
+      <h2>ورود یا ثبت‌نام</h2>
+      <input id="username" placeholder="نام کاربری">
+      <input id="email" type="email" placeholder="ایمیل">
+      <input id="password" type="password" placeholder="رمز عبور">
+      <button onclick="register()">ثبت‌نام</button>
+      <button onclick="login()">ورود</button>
+      <p id="authStatus"></p>
+    </section><section id="messenger" hidden>
+  <div class="top">
+    <span id="welcome"></span>
+    <button onclick="logout()">خروج</button>
+  </div>
+
+  <div class="newchat">
+    <input id="target" placeholder="نام کاربری مخاطب">
+    <button onclick="openChat()">شروع گفتگو</button>
+  </div>
+
+  <h3 id="chatTitle">گفتگوها</h3>
+  <div id="messages"></div>
+
+  <div class="send">
+    <input id="messageInput" placeholder="پیام خود را بنویس...">
+    <button onclick="sendMessage()">ارسال</button>
+  </div>
+  <p id="status"></p>
+</section>
+
+  </main>  <script src="config.js"></script>  <script src="app.js"></script></body>
+</html>
