@@ -1,44 +1,138 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABDOLLAH GAMER Messenger</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پنل تست SMS</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#080f20;
+ color:white;
+ font-family:Tahoma,Arial;
+ padding:20px;
+}
+.container{
+ max-width:450px;
+ margin:40px auto;
+}
+.header{
+ text-align:center;
+ margin-bottom:25px;
+}
+.header h1{color:#24d5b1}
+.header p{color:#9baac5;font-size:13px}
+.card{
+ background:#151f35;
+ padding:22px;
+ border-radius:20px;
+ border:1px solid #293b5d;
+}
+label{
+ display:block;
+ margin:18px 0 9px;
+}
+input,textarea{
+ width:100%;
+ padding:14px;
+ background:#0b1428;
+ border:1px solid #344563;
+ border-radius:12px;
+ color:white;
+ font:inherit;
+}
+textarea{height:130px;resize:vertical}
+button{
+ width:100%;
+ padding:15px;
+ margin-top:20px;
+ border:0;
+ border-radius:12px;
+ background:linear-gradient(90deg,#16c6a4,#3478fa);
+ color:white;
+ font-weight:bold;
+ font-size:15px;
+}
+#status{
+ margin-top:15px;
+ color:#39d9bd;
+ font-size:13px;
+ line-height:2;
+}
+.info{
+ margin-top:20px;
+ padding:12px;
+ background:#0b1428;
+ border-radius:12px;
+ color:#a9b9d5;
+ font-size:12px;
+ line-height:2;
+}
+</style>
 </head>
 <body>
-  <header>
-    <h2>ABDOLLAH GAMER</h2>
-    <span>پیام‌رسان آنلاین</span>
-  </header>  <main>
-    <section id="auth">
-      <h2>ورود یا ثبت‌نام</h2>
-      <input id="username" placeholder="نام کاربری">
-      <input id="email" type="email" placeholder="ایمیل">
-      <input id="password" type="password" placeholder="رمز عبور">
-      <button onclick="register()">ثبت‌نام</button>
-      <button onclick="login()">ورود</button>
-      <p id="authStatus"></p>
-    </section><section id="messenger" hidden>
-  <div class="top">
-    <span id="welcome"></span>
-    <button onclick="logout()">خروج</button>
-  </div>
 
-  <div class="newchat">
-    <input id="target" placeholder="نام کاربری مخاطب">
-    <button onclick="openChat()">شروع گفتگو</button>
-  </div>
+<div class="container">
 
-  <h3 id="chatTitle">گفتگوها</h3>
-  <div id="messages"></div>
+<div class="header">
+<h1>✉ پنل تست SMS</h1>
+<p>سامانه آزمایش ارسال پیامک</p>
+</div>
 
-  <div class="send">
-    <input id="messageInput" placeholder="پیام خود را بنویس...">
-    <button onclick="sendMessage()">ارسال</button>
-  </div>
-  <p id="status"></p>
-</section>
+<div class="card">
 
-  </main>  <script src="config.js"></script>  <script src="app.js"></script></body>
+<label>شماره تلفن</label>
+<input id="phone" type="tel"
+placeholder="09123456789">
+
+<label>متن پیامک</label>
+<textarea id="message"
+placeholder="پیام خود را بنویسید..."></textarea>
+
+<button onclick="sendSMS()">
+ارسال پیامک
+</button>
+
+<div id="status"></div>
+
+<div class="info">
+برای ارسال واقعی، برنامه پیامک گوشی باز می‌شود.
+ارسال نهایی باید توسط خودتان تأیید شود.
+</div>
+
+</div>
+</div>
+
+<script>
+function sendSMS(){
+
+let phone=document.getElementById("phone").value.trim();
+let message=document.getElementById("message").value.trim();
+let status=document.getElementById("status");
+
+if(!phone){
+status.innerText="شماره تلفن را وارد کنید";
+return;
+}
+
+if(!/^[+0-9 ()-]{7,20}$/.test(phone)){
+status.innerText="شماره تلفن معتبر نیست";
+return;
+}
+
+if(!message){
+status.innerText="متن پیام را وارد کنید";
+return;
+}
+
+status.innerText="در حال باز کردن برنامه پیامک...";
+
+window.location.href=
+"sms:"+phone+"?body="+encodeURIComponent(message);
+
+}
+</script>
+
+</body>
 </html>
