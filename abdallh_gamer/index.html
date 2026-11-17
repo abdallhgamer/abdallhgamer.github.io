@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abdallah Cloud</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f7f8fa;color:#24262b;font-family:Tahoma,Arial,sans-serif}
+header{height:72px;background:white;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0;z-index:5}
+.logo{font-size:21px;font-weight:bold;color:#222;direction:ltr}
+.avatar{width:40px;height:40px;background:#e9eaf0;border-radius:50%;display:grid;place-items:center;font-weight:bold}
+main{max-width:1050px;margin:35px auto;padding:0 18px}
+h1{font-size:27px;margin-bottom:9px}
+.sub{color:#888;font-size:14px;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.card{background:#fff;border:1px solid #eee;border-radius:17px;padding:22px 18px;cursor:pointer;transition:.2s;min-height:135px}
+.card:hover{transform:translateY(-3px);border-color:#c9cbd2;box-shadow:0 8px 25px #00000008}
+.icon{font-size:27px;margin-bottom:13px}
+.card h3{font-size:16px;margin:0 0 8px}
+.card p{font-size:12px;color:#888;margin:0;line-height:2}
+.panel{display:none;background:white;border:1px solid #eee;border-radius:18px;padding:22px;margin-top:22px}
+.panel.active{display:block}
+.panel h2{font-size:20px}
+button{border:0;border-radius:10px;padding:12px 17px;background:#24262b;color:white;cursor:pointer;font-family:inherit}
+input,textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;font-family:monospace;margin:10px 0;outline:none}
+textarea{min-height:150px;resize:vertical}
+.result{background:#f4f5f7;padding:14px;border-radius:10px;white-space:pre-wrap;overflow:auto;font-size:13px}
+nav{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);background:white;border:1px solid #eee;border-radius:18px;box-shadow:0 5px 25px #00000012;padding:10px 22px;display:flex;gap:35px;z-index:8}
+nav button{background:transparent;color:#555;padding:7px;font-size:19px}
+footer{text-align:center;color:#aaa;font-size:11px;padding:35px 0 100px}
+@media(max-width:600px){header{padding:0 18px}.grid{gap:10px}.card{padding:16px 12px;min-height:130px}nav{gap:23px}}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">Abdallah Cloud</div>
+ <div class="avatar">A</div>
+</header>
+
+<main>
+ <h1>خدمات ابری</h1>
+ <div class="sub">تمام ابزارهای مورد نیاز شما، در یک مکان.</div>
+
+ <div class="grid">
+  <div class="card" onclick="openPanel('shield')">
+   <div class="icon">🛡️</div>
+   <h3>Shield</h3><p>محافظت از اطلاعات و داده‌های شما</p>
+  </div>
+  <div class="card" onclick="openPanel('server')">
+   <div class="icon">☁️</div>
+   <h3>Virtual Server</h3><p>مدیریت سرویس‌های سرور</p>
+  </div>
+  <div class="card" onclick="openPanel('database')">
+   <div class="icon">🗄️</div>
+   <h3>Database</h3><p>ذخیره و مدیریت اطلاعات</p>
+  </div>
+  <div class="card" onclick="openPanel('storage')">
+   <div class="icon">📁</div>
+   <h3>Storage</h3><p>مدیریت فایل‌های شما</p>
+  </div>
+  <div class="card" onclick="openPanel('json')">
+   <div class="icon">{ }</div>
+   <h3>Json</h3><p>ساخت و ویرایش فایل JSON</p>
+  </div>
+  <div class="card" onclick="openPanel('email')">
+   <div class="icon">✉️</div>
+   <h3>Email</h3><p>بخش مدیریت ایمیل</p>
+  </div>
+  <div class="card" onclick="openPanel('website')">
+   <div class="icon">🌐</div>
+   <h3>Website</h3><p>ساخت صفحات وب</p>
+  </div>
+  <div class="card" onclick="openPanel('sms')">
+   <div class="icon">💬</div>
+   <h3>SMS</h3><p>بخش مدیریت پیامک</p>
+  </div>
+ </div>
+
+ <section class="panel" id="shield">
+  <h2>🛡️ Shield</h2>
+  <p>بررسی اعتبار داده‌های JSON</p>
+  <textarea id="secureInput">{ "name": "Abdallah" }</textarea>
+  <button onclick="checkJSON()">بررسی امنیت و اعتبار</button>
+  <div class="result" id="secureResult"></div>
+ </section>
+
+ <section class="panel" id="server">
+  <h2>☁️ Virtual Server</h2>
+  <p>این بخش فعلاً برای نمایش وضعیت طراحی شده است.</p>
+  <div class="result">وضعیت: سرور مجازی متصل نیست<br>برای راه‌اندازی سرور واقعی به ارائه‌دهنده سرور نیاز دارید.</div>
+ </section>
+
+ <section class="panel" id="database">
+  <h2>🗄️ Database</h2>
+  <input id="dbKey" placeholder="نام اطلاعات">
+  <textarea id="dbValue" placeholder="مقدار اطلاعات"></textarea>
+  <button onclick="saveDB()">ذخیره اطلاعات</button>
+  <button onclick="showDB()">نمایش اطلاعات</button>
+  <div class="result" id="dbResult"></div>
+ </section>
+
+ <section class="panel" id="storage">
+  <h2>📁 Storage</h2>
+  <input type="file" id="fileInput">
+  <button onclick="saveFile()">ذخیره فایل در مرورگر</button>
+  <div class="result" id="fileResult"></div>
+ </section>
+
+ <section class="panel" id="json">
+  <h2>{ } JSON Editor</h2>
+  <textarea id="jsonInput">{
+  "name": "Abdallah Cloud",
+  "version": "1.0"
+}</textarea>
+  <button onclick="formatJSON()">بررسی و مرتب‌سازی JSON</button>
+  <button onclick="downloadJSON()">دانلود JSON</button>
+  <div class="result" id="jsonResult"></div>
+ </section>
+
+ <section class="panel" id="email">
+  <h2>✉️ Email</h2>
+  <p>بخش ایمیل آماده اتصال به سرویس ارسال ایمیل است.</p>
+  <div class="result">وضعیت: سرویس ایمیل متصل نیست.</div>
+ </section>
+
+ <section class="panel" id="website">
+  <h2>🌐 Website Builder</h2>
+  <textarea id="siteCode"><h1>سلام به سایت من!</h1>
+<p>این سایت با Abdallah Cloud ساخته شده است.</p></textarea>
+  <button onclick="previewSite()">پیش‌نمایش سایت</button>
+  <button onclick="downloadSite()">دانلود HTML</button>
+  <iframe id="preview" sandbox="allow-scripts" style="width:100%;height:230px;border:1px solid #ddd;border-radius:10px;margin-top:15px;background:white"></iframe>
+ </section>
+
+ <section class="panel" id="sms">
+  <h2>💬 SMS</h2>
+  <p>برای ارسال پیامک واقعی به اتصال سرویس پیامکی نیاز است.</p>
+  <div class="result">وضعیت: سرویس پیامک متصل نیست.</div>
+ </section>
+</main>
+
+<footer>Abdallah Cloud © 2026</footer>
+
+<nav>
+ <button onclick="home()">⌂</button>
+ <button onclick="openPanel('database')">▦</button>
+ <button onclick="openPanel('storage')">▤</button>
+ <button onclick="openPanel('json')">{ }</button>
+ <button onclick="home()">⚙</button>
+</nav>
+
+<script>
+function openPanel(id){
+ document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'});
+}
+function home(){
+ document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function checkJSON(){
+ try{
+  const data=JSON.parse(document.getElementById('secureInput').value);
+  document.getElementById('secureResult').textContent='JSON معتبر است. کلیدها: '+Object.keys(data).join(', ');
+ }catch(e){
+  document.getElementById('secureResult').textContent='خطا: JSON معتبر نیست.';
+ }
+}
+function saveDB(){
+ const k=document.getElementById('dbKey').value.trim();
+ const v=document.getElementById('dbValue').value;
+ if(!k){alert('نام اطلاعات را وارد کنید');return}
+ localStorage.setItem('abdcloud_'+k,v);
+ alert('اطلاعات ذخیره شد');
+}
+function showDB(){
+ let out='';
+ for(let i=0;i<localStorage.length;i++){
+  const k=localStorage.key(i);
+  if(k.startsWith('abdcloud_'))out+=k.replace('abdcloud_','')+': '+localStorage.getItem(k)+'\n';
+ }
+ document.getElementById('dbResult').textContent=out||'اطلاعاتی وجود ندارد.';
+}
+function saveFile(){
+ const f=document.getElementById('fileInput').files[0];
+ if(!f){alert('یک فایل انتخاب کنید');return}
+ const url=URL.createObjectURL(f);
+ const a=document.createElement('a');
+ a.href=url;a.download=f.name;a.click();
+ URL.revokeObjectURL(url);
+ document.getElementById('fileResult').textContent='دانلود فایل آغاز شد: '+f.name;
+}
+function formatJSON(){
+ try{
+  const obj=JSON.parse(document.getElementById('jsonInput').value);
+  document.getElementById('jsonInput').value=JSON.stringify(obj,null,2);
+  document.getElementById('jsonResult').textContent='JSON معتبر است.';
+ }catch(e){
+  document.getElementById('jsonResult').textContent='خطا در ساختار JSON: '+e.message;
+ }
+}
+function downloadJSON(){
+ try{
+  const obj=JSON.parse(document.getElementById('jsonInput').value);
+  const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download='data.json';a.click();
+  URL.revokeObjectURL(a.href);
+ }catch(e){alert('ابتدا JSON را اصلاح کنید')}
+}
+function previewSite(){
+ const code=document.getElementById('siteCode').value;
+ document.getElementById('preview').srcdoc=code;
+}
+function downloadSite(){
+ const blob=new Blob([document.getElementById('siteCode').value],{type:'text/html'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);a.download='my-website.html';a.click();
+ URL.revokeObjectURL(a.href);
+}
+</script>
+</body>
+  </html>
