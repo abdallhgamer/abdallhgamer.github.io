@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عبدالله گیمر | سایت‌ساز</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a2e;--panel2:#18233c;--line:#263451;--text:#edf3ff;--muted:#9aabc8;--green:#22c55e;--blue:#4f8cff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif}
+header{height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:#10182a;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.brand{font-weight:800;font-size:19px}.brand span{color:var(--green)}.top-actions{display:flex;gap:9px;align-items:center}
+button,.btn{border:0;border-radius:9px;padding:10px 14px;background:var(--panel2);color:var(--text);font:inherit;cursor:pointer}
+button:hover{filter:brightness(1.18)}.primary{background:var(--green);color:#05210f;font-weight:700}.blue{background:var(--blue);color:white}
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 68px)}
+aside{background:#0e1729;border-left:1px solid var(--line);padding:18px 12px}
+.side-title{font-size:12px;color:var(--muted);padding:8px 10px}.nav{display:flex;gap:10px;align-items:center;padding:12px 10px;border-radius:9px;color:#cbd7ee;cursor:pointer}.nav.active,.nav:hover{background:#1a2945;color:white}.nav b{font-size:18px;width:22px;text-align:center}
+main{padding:22px;min-width:0}.welcome{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}.welcome h1{font-size:23px;margin:0 0 7px}.welcome p{color:var(--muted);margin:0;font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:18px}.card,.workarea{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px}.card small{color:var(--muted)}.card strong{display:block;font-size:25px;margin-top:8px}
+.workarea{padding:0;overflow:hidden}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}.tabs{display:flex;gap:5px}.tab{padding:8px 13px;color:var(--muted)}.tab.active{background:#263858;color:white}
+.editor-grid{display:grid;grid-template-columns:1fr 1fr;min-height:480px}.editor-pane,.preview-pane{min-width:0}.pane-head{padding:11px 14px;color:var(--muted);font-size:13px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+textarea{width:100%;height:440px;resize:vertical;border:0;outline:0;background:#080e1b;color:#d9f4e3;padding:17px;direction:ltr;text-align:left;font:13px/1.7 Consolas,monospace;tab-size:2}
+iframe{width:100%;height:440px;border:0;background:white}.hint{font-size:12px;color:var(--muted);padding:10px 14px;border-top:1px solid var(--line)}
+.projects{margin-top:18px}.projects h2{font-size:17px}.project-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}.project{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:13px}.project strong{display:block;margin-bottom:6px}.project small{color:var(--muted)}.project button{margin-top:10px;padding:7px 10px;font-size:12px}
+#toast{position:fixed;bottom:18px;left:18px;background:#173c2a;color:#d8ffe5;padding:12px 16px;border-radius:9px;display:none;z-index:10}
+@media(max-width:800px){.layout{grid-template-columns:1fr}aside{display:flex;overflow:auto;padding:7px;border-left:0;border-bottom:1px solid var(--line)}.side-title{display:none}.nav{white-space:nowrap;padding:9px}.cards{grid-template-columns:1fr 1fr}.editor-grid{grid-template-columns:1fr}.editor-pane textarea{height:330px}.preview-pane iframe{height:330px}main{padding:13px}.welcome{align-items:flex-start;flex-direction:column}}
+@media(max-width:430px){.cards{grid-template-columns:1fr}.brand{font-size:15px}header{padding:0 12px}.top-actions button{padding:8px;font-size:12px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">عبدالله <span>گیمر</span> <small style="font-size:11px;color:#9aabc8;font-weight:400">/ سایت‌ساز</small></div>
+  <div class="top-actions"><button onclick="newProject()">＋ پروژه جدید</button><button class="primary" onclick="saveProject()">ذخیره پروژه</button></div>
+</header>
+<div class="layout">
+<aside>
+  <div class="side-title">فضای کاری</div>
+  <div class="nav active" onclick="showSection('builder',this)"><b>⌘</b> ویرایشگر سایت</div>
+  <div class="nav" onclick="showSection('projects',this)"><b>▦</b> پروژه‌های من</div>
+  <div class="nav" onclick="showSection('help',this)"><b>؟</b> راهنما</div>
+</aside>
+<main>
+<section id="builder">
+  <div class="welcome"><div><h1>سایت خودت را بساز ✨</h1><p>کدت را بنویس، پیش‌نمایش را ببین و فایل سایت را دریافت کن.</p></div><button class="blue" onclick="downloadProject()">⬇ دانلود فایل HTML</button></div>
+  <div class="cards">
+    <div class="card"><small>پروژه‌های ذخیره‌شده</small><strong id="projectCount">۰</strong></div>
+    <div class="card"><small>وضعیت ویرایشگر</small><strong style="font-size:19px;color:#22c55e">آماده</strong></div>
+    <div class="card"><small>نوع خروجی</small><strong style="font-size:19px">HTML</strong></div>
+  </div>
+  <div class="workarea">
+    <div class="toolbar">
+      <div class="tabs"><button class="tab active" onclick="setTab('html',this)">HTML</button><button class="tab" onclick="setTab('css',this)">CSS</button><button class="tab" onclick="setTab('js',this)">JavaScript</button></div>
+      <div><button onclick="runCode()">▶ اجرای پیش‌نمایش</button><button onclick="resetCode()">بازنشانی نمونه</button></div>
+    </div>
+    <div class="editor-grid">
+      <div class="editor-pane"><div class="pane-head"><span>✎ ویرایش کد</span><span id="fileLabel">index.html</span></div><textarea id="code" spellcheck="false" aria-label="ویرایشگر کد"></textarea><div class="hint">کدها در همین مرورگر قابل ویرایش هستند. برای ذخیره دائمی، «ذخیره پروژه» را بزن.</div></div>
+      <div class="preview-pane"><div class="pane-head"><span>◉ پیش‌نمایش زنده</span><span>خروجی سایت</span></div><iframe id="preview" title="پیش‌نمایش سایت" sandbox="allow-scripts"></iframe></div>
+    </div>
+  </div>
+</section>
+<section id="projects" style="display:none" class="projects"><h2>پروژه‌های من</h2><p style="color:var(--muted);font-size:13px">پروژه‌هایی که در این مرورگر ذخیره کرده‌ای نمایش داده می‌شوند.</p><div class="project-list" id="projectList"></div></section>
+<section id="help" style="display:none" class="projects"><h2>راهنمای استفاده</h2><div class="card"><p>۱. از بخش HTML کد صفحه را وارد کن.</p><p>۲. در تب CSS ظاهر سایت را تغییر بده.</p><p>۳. در تب JavaScript قابلیت‌های تعاملی اضافه کن.</p><p>۴. روی «اجرای پیش‌نمایش» بزن.</p><p>۵. برای نگهداری پروژه در همین مرورگر، آن را ذخیره کن؛ برای دریافت فایل نهایی از «دانلود فایل HTML» استفاده کن.</p><p style="color:#fbbf24">توجه: این نسخه روی GitHub Pages اجرا می‌شود. انتشار خودکار سایت‌های کاربران با آدرس جداگانه به سرور یا اتصال امن GitHub نیاز دارد و در این فایل استاتیک فعال نیست.</p></div></section>
+</main>
+</div>
+<div id="toast"></div>
+<script>
+const defaults={
+html:`<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>سایت من</title></head>
+<body>
+  <main class="box">
+    <h1>سلام! به سایت من خوش آمدید 👋</h1>
+    <p>این اولین سایت من است که با سایت‌ساز عبدالله گیمر ساخته‌ام.</p>
+    <button onclick="alert('خوش آمدی!')">کلیک کن</button>
+  </main>
+</body>
+</html>`,
+css:`body{font-family:Tahoma,Arial,sans-serif;background:#eef2ff;margin:0;padding:40px 15px;color:#172554}
+.box{max-width:650px;margin:50px auto;background:white;padding:35px;border-radius:18px;text-align:center;box-shadow:0 12px 35px #1e3a8a18}
+h1{color:#2563eb}p{line-height:2}button{background:#2563eb;color:white;border:0;padding:12px 22px;border-radius:9px;cursor:pointer}`,
+js:`// کدهای JavaScript خود را اینجا بنویسید
+console.log("سایت آماده است!");`
+};
+let currentTab='html',data={...defaults},projectName='پروژه من';
+const $=id=>document.getElementById(id);
+function setTab(tab,el){data[currentTab]=$('code').value;currentTab=tab;$('code').value=data[tab];$('fileLabel').textContent=tab==='html'?'index.html':tab==='css'?'style.css':'script.js';document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));el.classList.add('active')}
+function fullDocument(){let h=data.html;const style='<style>'+data.css+'</style>';const script='<script>'+data.js+'<\/script>';if(h.includes('</head>'))h=h.replace('</head>',style+'</head>');else h=style+h;if(h.includes('</body>'))h=h.replace('</body>',script+'</body>');else h+=script;return h}
+function runCode(){data[currentTab]=$('code').value;$('preview').srcdoc=fullDocument();toast('پیش‌نمایش به‌روزرسانی شد')}
+function resetCode(){if(!confirm('کدها به نمونه اولیه برگردند؟'))return;data={...defaults};$('code').value=data[currentTab];runCode()}
+function toast(msg){$('toast').textContent=msg;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2300)}
+function getProjects(){try{return JSON.parse(localStorage.getItem('abdullah_builder_projects')||'[]')}catch(e){return []}}
+function saveProject(){data[currentTab]=$('code').value;let name=prompt('نام پروژه را وارد کن:',projectName);if(name===null)return;projectName=name.trim()||'پروژه من';let list=getProjects();let item={name:projectName,data,updated:new Date().toLocaleString('fa-IR')};let i=list.findIndex(x=>x.name===projectName);if(i>=0)list[i]=item;else list.unshift(item);localStorage.setItem('abdullah_builder_projects',JSON.stringify(list));updateProjects();toast('پروژه ذخیره شد')}
+function updateProjects(){let list=getProjects();$('projectCount').textContent=list.length.toLocaleString('fa-IR');$('projectList').innerHTML=list.length?list.map((p,i)=>`<div class="project"><strong>${escapeHtml(p.name)}</strong><small>${escapeHtml(p.updated||'')}</small><br><button onclick="loadProject(${i})">باز کردن</button><button onclick="deleteProject(${i})">حذف</button></div>`).join(''):'<div class="card">هنوز پروژه‌ای ذخیره نشده است.</div>'}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function loadProject(i){let p=getProjects()[i];if(!p)return;projectName=p.name;data=p.data;currentTab='html';$('code').value=data.html;document.querySelectorAll('.tab').forEach((x,n)=>x.classList.toggle('active',n===0));$('fileLabel').textContent='index.html';runCode();showSection('builder',document.querySelector('.nav'));toast('پروژه باز شد')}
+function deleteProject(i){if(!confirm('این پروژه حذف شود؟'))return;let list=getProjects();list.splice(i,1);localStorage.setItem('abdullah_builder_projects',JSON.stringify(list));updateProjects()}
+function downloadProject(){data[currentTab]=$('code').value;let blob=new Blob([fullDocument()],{type:'text/html;charset=utf-8'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='index.html';a.click();URL.revokeObjectURL(a.href);toast('فایل HTML دانلود شد')}
+function newProject(){if(!confirm('یک پروژه تازه بسازیم؟ تغییرات ذخیره‌نشده از بین می‌روند.'))return;data={...defaults};projectName='پروژه من';currentTab='html';$('code').value=data.html;document.querySelectorAll('.tab').forEach((x,n)=>x.classList.toggle('active',n===0));$('fileLabel').textContent='index.html';runCode()}
+function showSection(id,el){['builder','projects','help'].forEach(x=>$(x).style.display=x===id?'block':'none');document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));if(el)el.classList.add('active');if(id==='projects')updateProjects()}
+$('code').value=data.html;$('code').addEventListener('input',()=>{data[currentTab]=$('code').value});$('code').addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();let a=e.target.selectionStart,b=e.target.selectionEnd;e.target.setRangeText('  ',a,b,'end')}});runCode();updateProjects();
+</script>
+</body>
+</html>
