@@ -3,112 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Abdallah Cloud | ساخت لینک</title>
+<title>Abdallah Cloud</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0b1020;color:#fff;font-family:Tahoma,Arial}
-header{padding:22px;text-align:center;background:#111a30;border-bottom:1px solid #263553}
-header h1{margin:0;color:#42a5ff;font-size:25px}
-header p{color:#aab7d0;font-size:13px}
-main{max-width:850px;margin:30px auto;padding:18px}
-.card{background:#121c32;border:1px solid #263553;border-radius:16px;padding:22px}
-label{display:block;margin:18px 0 9px;color:#dce8ff}
-input,textarea{width:100%;padding:14px;border:1px solid #344768;border-radius:10px;background:#091326;color:#fff;font:14px Tahoma}
-textarea{height:270px;direction:ltr;text-align:left;resize:vertical}
-button{width:100%;padding:15px;margin-top:18px;border:0;border-radius:10px;background:#1689ff;color:white;font-size:16px;font-weight:bold;cursor:pointer}
+body{margin:0;background:#080d19;color:#fff;font-family:Tahoma}
+header{background:#101a2d;padding:22px;text-align:center;border-bottom:1px solid #263b5c}
+.logo{font-size:27px;font-weight:bold;color:#38a5ff}
+header p{color:#9aaac4;font-size:13px}
+.container{max-width:850px;margin:35px auto;padding:15px}
+.box{background:#111c30;border:1px solid #263b5c;border-radius:17px;padding:23px}
+h2{margin-top:0}
+label{display:block;margin:20px 0 9px;color:#b9c9df}
+input,textarea{width:100%;background:#080f1e;border:1px solid #304565;color:white;border-radius:10px;padding:14px;font-family:Tahoma}
+textarea{height:260px;direction:ltr;text-align:left;font-family:monospace}
+button{border:0;border-radius:10px;padding:15px;background:#1689ff;color:white;font-size:16px;font-weight:bold;width:100%;margin-top:17px;cursor:pointer}
 button:disabled{opacity:.5}
-#result{display:none;margin-top:20px;padding:16px;background:#092a25;border:1px solid #1b806b;border-radius:10px;overflow-wrap:anywhere}
-#result a{color:#62e8bd}
-#status{margin-top:14px;color:#ffd166;text-align:center}
-.small{color:#9eabc3;font-size:12px;line-height:2}
+.secondary{background:#263b5c}
+#status{text-align:center;margin-top:18px;color:#ffd166;line-height:2}
+#result{display:none;background:#082d27;border:1px solid #16876b;padding:17px;border-radius:12px;margin-top:20px;overflow-wrap:anywhere}
+#link{color:#62edbd}
+.preview{margin-top:20px}
+iframe{width:100%;height:250px;background:white;border:0;border-radius:10px}
+footer{text-align:center;color:#65758e;padding:30px;font-size:12px}
 </style>
 </head>
 <body>
+
 <header>
-<h1>☁ Abdallah Cloud</h1>
-<p>ساخت و انتشار لینک صفحات HTML</p>
+<div class="logo">☁ ABDALLAH CLOUD</div>
+<p>HTML Website Builder</p>
 </header>
 
-<main>
-<div class="card">
-<h2>ساخت صفحه جدید</h2>
-<p class="small">کد HTML خودت را وارد کن و برای صفحه یک نام انتخاب کن.</p>
+<div class="container">
+<div class="box">
+<h2>ساخت لینک جدید</h2>
 
-<label for="pageName">نام صفحه</label>
-<input id="pageName" placeholder="مثلاً game یا my-site" maxlength="40">
+<label>نام صفحه دلخواه</label>
+<input id="name" placeholder="مثلاً game">
 
-<label for="htmlCode">کد HTML</label>
-<textarea id="htmlCode" placeholder="کد HTML خود را اینجا وارد کنید..."></textarea>
+<label>کد HTML سایت</label>
+<textarea id="code" placeholder="کد HTML خود را وارد کنید..."></textarea>
 
-<button id="createBtn" onclick="createPage()">ساخت لینک</button>
+<button class="secondary" onclick="preview()">پیش‌نمایش</button>
+<div class="preview" id="previewBox" style="display:none">
+<iframe id="frame" sandbox="allow-scripts"></iframe>
+</div>
+
+<button id="publish" onclick="publishPage()">ساخت لینک</button>
 <div id="status"></div>
 
 <div id="result">
-<strong>لینک صفحه ساخته شد:</strong>
-<p><a id="pageLink" target="_blank" rel="noopener"></a></p>
+<strong>لینک شما ساخته شد:</strong>
+<p><a id="link" target="_blank" rel="noopener"></a></p>
 <button onclick="copyLink()">کپی لینک</button>
 </div>
 </div>
-</main>
+</div>
+
+<footer>ABDALLAH CLOUD © 2026</footer>
 
 <script>
-const WORKER_URL = "https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev";
+const API = "https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev";
 
-async function createPage(){
-  const name = document.getElementById("pageName").value.trim().toLowerCase();
-  const html = document.getElementById("htmlCode").value;
-  const status = document.getElementById("status");
-  const btn = document.getElementById("createBtn");
-  const result = document.getElementById("result");
+function preview(){
+ const html=document.getElementById("code").value;
+ if(!html.trim()){
+  document.getElementById("status").textContent="ابتدا کد HTML را وارد کن.";
+  return;
+ }
+ const frame=document.getElementById("frame");
+ frame.srcdoc=html;
+ document.getElementById("previewBox").style.display="block";
+}
 
-  result.style.display = "none";
+async function publishPage(){
+ const name=document.getElementById("name").value.trim().toLowerCase();
+ const html=document.getElementById("code").value;
+ const status=document.getElementById("status");
+ const button=document.getElementById("publish");
+ document.getElementById("result").style.display="none";
 
-  if(!/^[a-z0-9][a-z0-9_-]{0,39}$/.test(name)){
-    status.textContent = "نام صفحه را با حروف انگلیسی و اعداد وارد کن.";
-    return;
-  }
-  if(!html.trim()){
-    status.textContent = "کد HTML را وارد کن.";
-    return;
-  }
-  if(html.length > 100000){
-    status.textContent = "حجم کد باید کمتر از ۱۰۰ کیلوبایت باشد.";
-    return;
-  }
+ if(!/^[a-z0-9][a-z0-9_-]{0,39}$/.test(name)){
+  status.textContent="نام انگلیسی معتبر وارد کن.";
+  return;
+ }
+ if(!html.trim()){
+  status.textContent="کد HTML را وارد کن.";
+  return;
+ }
+ if(html.length>100000){
+  status.textContent="حجم کد بیشتر از حد مجاز است.";
+  return;
+ }
 
-  btn.disabled = true;
-  status.textContent = "در حال ساخت و انتشار صفحه...";
+ button.disabled=true;
+ status.textContent="در حال انتشار صفحه...";
 
-  try{
-    const response = await fetch(WORKER_URL,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({name,html})
-    });
+ try{
+  const response=await fetch(API,{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({name,html})
+  });
 
-    const data = await response.json();
+  const data=await response.json();
+  if(!response.ok) throw new Error(data.error||"خطا در انتشار");
 
-    if(!response.ok) throw new Error(data.error || "ساخت لینک انجام نشد.");
-
-    document.getElementById("pageLink").href = data.url;
-    document.getElementById("pageLink").textContent = data.url;
-    result.style.display = "block";
-    status.textContent = "صفحه منتشر شد. ممکن است نمایش آن کمی زمان ببرد.";
-  }catch(error){
-    status.textContent = "خطا: " + error.message;
-  }finally{
-    btn.disabled = false;
-  }
+  const url=data.url;
+  const link=document.getElementById("link");
+  link.href=url;
+  link.textContent=url;
+  document.getElementById("result").style.display="block";
+  status.textContent="صفحه با موفقیت منتشر شد!";
+ }catch(e){
+  status.textContent="خطا: "+e.message;
+ }finally{
+  button.disabled=false;
+ }
 }
 
 async function copyLink(){
-  const link = document.getElementById("pageLink").href;
-  try{
-    await navigator.clipboard.writeText(link);
-    document.getElementById("status").textContent = "لینک کپی شد.";
-  }catch(e){
-    document.getElementById("status").textContent = "لینک را لمس کن و کپی کن.";
-  }
+ const url=document.getElementById("link").href;
+ try{
+  await navigator.clipboard.writeText(url);
+  document.getElementById("status").textContent="لینک کپی شد!";
+ }catch(e){
+  document.getElementById("status").textContent=url;
+ }
 }
 </script>
 </body>
