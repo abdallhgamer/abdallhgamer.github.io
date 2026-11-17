@@ -2,226 +2,122 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Abdallah Cloud</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f6f7f9;color:#25262b;font-family:Tahoma,Arial}
-header{height:70px;background:white;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0}
-.logo{font-size:21px;font-weight:bold;direction:ltr}
-main{max-width:900px;margin:35px auto;padding:15px}
-h1{font-size:26px}
-.muted{color:#888;font-size:13px}
-.card{background:white;border:1px solid #eee;border-radius:16px;padding:20px;margin:17px 0}
-input,textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:9px;margin:9px 0;font-family:monospace}
-textarea{height:260px;direction:ltr;text-align:left}
-button{border:0;background:#24262b;color:white;padding:12px 18px;border-radius:9px;cursor:pointer;margin:4px;font-family:inherit}
-button.secondary{background:#eee;color:#222}
+body{margin:0;background:#f6f7f9;font-family:Tahoma;color:#25262b}
+header{background:white;padding:23px 7%;border-bottom:1px solid #eee;font-size:21px;font-weight:bold;direction:ltr}
+main{max-width:850px;margin:35px auto;padding:15px}
+h1{font-size:25px}
+.desc{color:#888;font-size:13px}
+.card{background:white;border:1px solid #eee;border-radius:16px;padding:22px;margin-top:20px}
+input,textarea{width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin:10px 0;font-family:monospace}
+textarea{height:280px;direction:ltr;text-align:left}
+button{border:0;background:#25262b;color:white;padding:13px 20px;border-radius:10px;cursor:pointer;font-family:Tahoma}
+button.light{background:#eee;color:#222}
 iframe{width:100%;height:300px;border:1px solid #ddd;border-radius:10px;background:white}
-.link{direction:ltr;text-align:left;background:#f2f3f5;padding:13px;border-radius:9px;overflow-wrap:anywhere}
-.status{font-size:13px;color:#777;margin:12px 0}
-.site{padding:12px;border-bottom:1px solid #eee}
+#result{display:none}
+.link{direction:ltr;background:#f1f2f4;padding:14px;border-radius:9px;overflow-wrap:anywhere}
 </style>
 </head>
 <body>
-
-<header>
- <div class="logo">Abdallah Cloud</div>
- <div>☁️</div>
-</header>
-
+<header>Abdallah Cloud ☁️</header>
 <main>
- <h1>HTML Website Builder</h1>
- <p class="muted">سایت خودت را بساز و با یک لینک منتشر کن.</p>
+<h1>ساخت سایت HTML</h1>
+<p class="desc">کد HTML خودت را بنویس و سایتت را بساز.</p>
 
- <div id="builder">
-  <div class="card">
-   <h3>ساخت سایت جدید</h3>
-   <input id="siteName" placeholder="نام سایت">
-   <textarea id="htmlCode" spellcheck="false"><!DOCTYPE html>
+<div class="card">
+<label>نام سایت</label>
+<input id="name" placeholder="مثلاً neme">
+
+<label>کد HTML</label>
+<textarea id="code" spellcheck="false"><!DOCTYPE html>
 <html>
 <head>
 <title>My Website</title>
 </head>
 <body>
-<h1>سلام به سایت من!</h1>
-<p>این سایت با Abdallah Cloud ساخته شده است.</p>
+<h1>سلام دنیا!</h1>
+<p>سایت من با Abdallah Cloud ساخته شد.</p>
 </body>
 </html></textarea>
-   <button onclick="preview()">پیش‌نمایش</button>
-   <button onclick="publish()">🚀 انتشار سایت</button>
-   <div class="status" id="status">آماده ساخت سایت</div>
-  </div>
 
-  <div class="card">
-   <h3>پیش‌نمایش سایت</h3>
-   <iframe id="previewFrame" sandbox=""></iframe>
-  </div>
+<button onclick="preview()">پیش‌نمایش</button>
+<button onclick="createSite()">ساخت سایت</button>
+<p id="status" class="desc"></p>
+</div>
 
-  <div class="card" id="publishedBox" style="display:none">
-   <h3>سایت منتشر شد!</h3>
-   <div class="link" id="publishedLink"></div>
-   <button onclick="copyLink()">کپی لینک</button>
-   <button class="secondary" onclick="openLink()">بازکردن سایت</button>
-  </div>
+<div class="card">
+<h3>پیش‌نمایش</h3>
+<iframe id="frame" sandbox=""></iframe>
+</div>
 
-  <div class="card">
-   <h3>سایت‌های منتشرشده</h3>
-   <div id="sitesList" class="muted">هنوز سایتی منتشر نکرده‌اید.</div>
-  </div>
- </div>
-
- <div id="viewer" style="display:none">
-  <h2>صفحه منتشرشده</h2>
-  <div class="status" id="viewerStatus"></div>
-  <iframe id="viewerFrame" sandbox=""></iframe>
-  <button class="secondary" onclick="location.href=location.pathname">بازگشت</button>
- </div>
+<div class="card" id="result">
+<h3>سایت شما ساخته شد!</h3>
+<div class="link" id="url"></div>
+<br><br>
+<button onclick="copyURL()">کپی لینک</button>
+<button class="light" onclick="downloadSite()">دانلود HTML</button>
+</div>
 </main>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import {
- getFirestore, collection, addDoc, getDoc, doc,
- query, where, getDocs, serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+<script>
+let output="";
 
-/* اطلاعات Firebase خودت را اینجا وارد کن */
-const firebaseConfig = {
- apiKey: "YOUR_API_KEY",
- authDomain: "YOUR_PROJECT.firebaseapp.com",
- projectId: "YOUR_PROJECT_ID",
- storageBucket: "YOUR_PROJECT.appspot.com",
- messagingSenderId: "YOUR_SENDER_ID",
- appId: "YOUR_APP_ID"
-};
-
-let db=null;
-let currentLink="";
-
-const configured = !Object.values(firebaseConfig).some(
- v=>String(v).startsWith("YOUR_")
-);
-
-if(configured){
- const app=initializeApp(firebaseConfig);
- db=getFirestore(app);
+function preview(){
+ document.getElementById("frame").srcdoc=
+ document.getElementById("code").value;
 }
 
-window.preview=function(){
- const code=document.getElementById("htmlCode").value;
- document.getElementById("previewFrame").srcdoc=code;
-};
+function createSite(){
+ const name=document.getElementById("name").value.trim();
+ const code=document.getElementById("code").value;
 
-window.publish=async function(){
- const name=document.getElementById("siteName").value.trim();
- const code=document.getElementById("htmlCode").value;
- const status=document.getElementById("status");
-
- if(!name){alert("نام سایت را وارد کنید.");return;}
- if(!code.trim()){alert("کد HTML را وارد کنید.");return;}
- if(!db){
-  status.textContent="ابتدا اطلاعات Firebase را در کد وارد کنید.";
+ if(!/^[a-zA-Z0-9_-]{1,40}$/.test(name)){
+  alert("نام سایت را با حروف انگلیسی وارد کن.");
   return;
  }
 
- status.textContent="در حال انتشار...";
-
- try{
-  const result=await addDoc(collection(db,"sites"),{
-   name:name,
-   html:code,
-   createdAt:serverTimestamp()
-  });
-
-  currentLink=location.origin+location.pathname+"?site="+encodeURIComponent(result.id);
-
-  document.getElementById("publishedLink").textContent=currentLink;
-  document.getElementById("publishedBox").style.display="block";
-  status.textContent="انتشار با موفقیت انجام شد.";
-  loadSites();
- }catch(error){
-  status.textContent="خطا در انتشار: "+error.message;
- }
-};
-
-window.copyLink=async function(){
- if(!currentLink)return;
- try{
-  await navigator.clipboard.writeText(currentLink);
-  alert("لینک کپی شد.");
- }catch(e){
-  prompt("لینک سایت:",currentLink);
- }
-};
-
-window.openLink=function(){
- if(currentLink)window.open(currentLink,"_blank");
-};
-
-async function loadSites(){
- if(!db)return;
- const list=document.getElementById("sitesList");
- list.textContent="در حال بارگذاری...";
-
- try{
-  const result=await getDocs(collection(db,"sites"));
-  list.innerHTML="";
-  if(result.empty){list.textContent="هنوز سایتی منتشر نشده.";return;}
-
-  result.forEach(item=>{
-   const data=item.data();
-   const link=location.origin+location.pathname+"?site="+encodeURIComponent(item.id);
-   const row=document.createElement("div");
-   row.className="site";
-   const title=document.createElement("b");
-   title.textContent=data.name||"بدون نام";
-   const a=document.createElement("a");
-   a.href=link;
-   a.textContent=" مشاهده سایت";
-   a.target="_blank";
-   row.append(title,a);
-   list.appendChild(row);
-  });
- }catch(e){
-  list.textContent="خطا در دریافت سایت‌ها.";
- }
-}
-
-async function openPublishedSite(id){
- document.getElementById("builder").style.display="none";
- document.getElementById("viewer").style.display="block";
- const status=document.getElementById("viewerStatus");
- status.textContent="در حال دریافت سایت...";
-
- if(!db){
-  status.textContent="اتصال Firebase تنظیم نشده است.";
+ if(!code.trim()){
+  alert("کد HTML را وارد کن.");
   return;
  }
 
- try{
-  const result=await getDoc(doc(db,"sites",id));
-  if(!result.exists()){
-   status.textContent="این سایت پیدا نشد.";
-   return;
-  }
-  const data=result.data();
-  status.textContent=data.name||"سایت منتشرشده";
-  document.getElementById("viewerFrame").srcdoc=data.html;
- }catch(e){
-  status.textContent="خطا در بارگذاری سایت.";
- }
+ output=code;
+
+ const blob=new Blob([code],{type:"text/html"});
+ const downloadURL=URL.createObjectURL(blob);
+
+ document.getElementById("url").textContent=
+ "فایل آماده است: "+name+".html";
+
+ document.getElementById("result").style.display="block";
+ document.getElementById("status").textContent=
+ "فایل HTML ساخته شد. برای انتشار آنلاین آن را در پوشه cloud مخزن GitHub قرار بده.";
+
+ const a=document.createElement("a");
+ a.href=downloadURL;
+ a.download=name+".html";
+ a.click();
+
+ setTimeout(()=>URL.revokeObjectURL(downloadURL),10000);
 }
 
-const params=new URLSearchParams(location.search);
-const siteId=params.get("site");
-
-if(siteId){
- openPublishedSite(siteId);
-}else{
- loadSites();
- preview();
+function copyURL(){
+ const text=document.getElementById("url").textContent;
+ navigator.clipboard.writeText(text).then(()=>alert("متن کپی شد."));
 }
+
+function downloadSite(){
+ if(!output)return;
+ const blob=new Blob([output],{type:"text/html"});
+ const a=document.createElement("a");
+ a.href=URL.createObjectURL(blob);
+ a.download=document.getElementById("name").value+".html";
+ a.click();
+}
+preview();
 </script>
 </body>
-  </html>
+</html>
