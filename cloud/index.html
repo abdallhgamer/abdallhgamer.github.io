@@ -2,134 +2,85 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Abdallah Cloud</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#080d19;color:#fff;font-family:Tahoma}
-header{background:#101a2d;padding:22px;text-align:center;border-bottom:1px solid #263b5c}
-.logo{font-size:27px;font-weight:bold;color:#38a5ff}
-header p{color:#9aaac4;font-size:13px}
-.container{max-width:850px;margin:35px auto;padding:15px}
-.box{background:#111c30;border:1px solid #263b5c;border-radius:17px;padding:23px}
-h2{margin-top:0}
-label{display:block;margin:20px 0 9px;color:#b9c9df}
-input,textarea{width:100%;background:#080f1e;border:1px solid #304565;color:white;border-radius:10px;padding:14px;font-family:Tahoma}
-textarea{height:260px;direction:ltr;text-align:left;font-family:monospace}
-button{border:0;border-radius:10px;padding:15px;background:#1689ff;color:white;font-size:16px;font-weight:bold;width:100%;margin-top:17px;cursor:pointer}
-button:disabled{opacity:.5}
-.secondary{background:#263b5c}
-#status{text-align:center;margin-top:18px;color:#ffd166;line-height:2}
-#result{display:none;background:#082d27;border:1px solid #16876b;padding:17px;border-radius:12px;margin-top:20px;overflow-wrap:anywhere}
-#link{color:#62edbd}
-.preview{margin-top:20px}
-iframe{width:100%;height:250px;background:white;border:0;border-radius:10px}
-footer{text-align:center;color:#65758e;padding:30px;font-size:12px}
+body{margin:0;background:#080e1c;color:white;font-family:Tahoma}
+header{background:#111d33;padding:25px;text-align:center}
+header h1{color:#35a5ff;margin:0}
+header p{color:#9aabc5}
+main{max-width:800px;margin:30px auto;padding:15px}
+.box{background:#111d33;padding:22px;border:1px solid #2a3c5c;border-radius:15px}
+label{display:block;margin:18px 0 9px}
+input,textarea{width:100%;padding:14px;background:#080f20;color:white;border:1px solid #344968;border-radius:9px;font-family:Tahoma}
+textarea{height:250px;direction:ltr;text-align:left}
+button{width:100%;padding:15px;margin-top:15px;border:0;border-radius:9px;background:#168cff;color:white;font-size:16px;cursor:pointer}
+button.secondary{background:#263c5e}
+iframe{width:100%;height:300px;background:white;border:0;margin-top:15px;border-radius:9px}
+#status{color:#ffd166;text-align:center;margin-top:15px}
 </style>
 </head>
 <body>
-
 <header>
-<div class="logo">☁ ABDALLAH CLOUD</div>
+<h1>☁ ABDALLAH CLOUD</h1>
 <p>HTML Website Builder</p>
 </header>
-
-<div class="container">
+<main>
 <div class="box">
-<h2>ساخت لینک جدید</h2>
+<h2>ساخت صفحه HTML</h2>
 
-<label>نام صفحه دلخواه</label>
+<label>نام صفحه</label>
 <input id="name" placeholder="مثلاً game">
 
-<label>کد HTML سایت</label>
+<label>کد HTML</label>
 <textarea id="code" placeholder="کد HTML خود را وارد کنید..."></textarea>
 
-<button class="secondary" onclick="preview()">پیش‌نمایش</button>
-<div class="preview" id="previewBox" style="display:none">
-<iframe id="frame" sandbox="allow-scripts"></iframe>
-</div>
+<button class="secondary" onclick="preview()">پیش‌نمایش سایت</button>
+<iframe id="preview" sandbox="allow-scripts" style="display:none"></iframe>
 
-<button id="publish" onclick="publishPage()">ساخت لینک</button>
-<div id="status"></div>
-
-<div id="result">
-<strong>لینک شما ساخته شد:</strong>
-<p><a id="link" target="_blank" rel="noopener"></a></p>
-<button onclick="copyLink()">کپی لینک</button>
+<button onclick="downloadPage()">ساخت فایل HTML</button>
+<p id="status"></p>
 </div>
-</div>
-</div>
-
-<footer>ABDALLAH CLOUD © 2026</footer>
+</main>
 
 <script>
-const API = "https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev";
-
 function preview(){
- const html=document.getElementById("code").value;
- if(!html.trim()){
-  document.getElementById("status").textContent="ابتدا کد HTML را وارد کن.";
+ const code=document.getElementById("code").value;
+ if(!code.trim()){
+  status("ابتدا کد HTML را وارد کن.");
   return;
  }
- const frame=document.getElementById("frame");
- frame.srcdoc=html;
- document.getElementById("previewBox").style.display="block";
+ const frame=document.getElementById("preview");
+ frame.srcdoc=code;
+ frame.style.display="block";
 }
 
-async function publishPage(){
- const name=document.getElementById("name").value.trim().toLowerCase();
- const html=document.getElementById("code").value;
- const status=document.getElementById("status");
- const button=document.getElementById("publish");
- document.getElementById("result").style.display="none";
-
- if(!/^[a-z0-9][a-z0-9_-]{0,39}$/.test(name)){
-  status.textContent="نام انگلیسی معتبر وارد کن.";
-  return;
- }
- if(!html.trim()){
-  status.textContent="کد HTML را وارد کن.";
-  return;
- }
- if(html.length>100000){
-  status.textContent="حجم کد بیشتر از حد مجاز است.";
-  return;
- }
-
- button.disabled=true;
- status.textContent="در حال انتشار صفحه...";
-
- try{
-  const response=await fetch(API,{
-   method:"POST",
-   headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({name,html})
-  });
-
-  const data=await response.json();
-  if(!response.ok) throw new Error(data.error||"خطا در انتشار");
-
-  const url=data.url;
-  const link=document.getElementById("link");
-  link.href=url;
-  link.textContent=url;
-  document.getElementById("result").style.display="block";
-  status.textContent="صفحه با موفقیت منتشر شد!";
- }catch(e){
-  status.textContent="خطا: "+e.message;
- }finally{
-  button.disabled=false;
- }
+function status(message){
+ document.getElementById("status").textContent=message;
 }
 
-async function copyLink(){
- const url=document.getElementById("link").href;
- try{
-  await navigator.clipboard.writeText(url);
-  document.getElementById("status").textContent="لینک کپی شد!";
- }catch(e){
-  document.getElementById("status").textContent=url;
+function downloadPage(){
+ const name=document.getElementById("name").value.trim();
+ const code=document.getElementById("code").value;
+
+ if(!/^[a-zA-Z0-9_-]{1,40}$/.test(name)){
+  status("نام انگلیسی معتبر وارد کن.");
+  return;
  }
+ if(!code.trim()){
+  status("کد HTML را وارد کن.");
+  return;
+ }
+
+ const blob=new Blob([code],{type:"text/html;charset=utf-8"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download=name+".html";
+ a.click();
+ URL.revokeObjectURL(url);
+ status("فایل "+name+".html ساخته شد. برای انتشار، آن را در پوشه cloud مخزن GitHub قرار بده.");
 }
 </script>
 </body>
