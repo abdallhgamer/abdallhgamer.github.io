@@ -2,198 +2,101 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>سرچ عبدالله گیمر</title>
+
+<script async src="https://cse.google.com/cse.js?cx=41a84d287e27b4d4f"></script>
+
 <style>
 *{box-sizing:border-box}
 body{
-margin:0;background:#080e1c;color:#fff;
-font-family:Tahoma,Arial,sans-serif;
+margin:0;
+background:#080e1c;
+color:white;
+font-family:Tahoma,Arial;
 }
 header{
-height:75px;padding:0 6%;
-display:flex;align-items:center;
-justify-content:space-between;
-border-bottom:1px solid #1c2c46;
+padding:22px;
 background:#0b1425;
+border-bottom:1px solid #20334f;
+font-size:20px;
+font-weight:bold;
+color:#39a8ff;
 }
-.brand{font-size:19px;font-weight:bold;color:#46aaff}
-.brand b{color:#fff}
-.status{font-size:12px;color:#8ea6c7}
 main{
-min-height:calc(100vh - 140px);
-display:flex;align-items:center;
-flex-direction:column;
-padding:90px 18px 45px;
+max-width:1000px;
+margin:55px auto;
+padding:20px;
 }
-.badge{
-border:1px solid #234b78;
-background:#102746;
-color:#64baff;
-padding:9px 18px;border-radius:30px;
-font-size:12px;margin-bottom:25px;
+.logo{
+text-align:center;
+font-size:38px;
+font-weight:bold;
+margin-bottom:15px;
 }
-h1{
-font-size:clamp(32px,7vw,58px);
-margin:0 0 14px;text-align:center;
+.logo span{color:#299cff}
+.desc{
+text-align:center;
+color:#8ca4c2;
+margin-bottom:35px;
 }
-h1 span{color:#299cff}
-.description{
-color:#8ea2bd;font-size:14px;
-margin-bottom:35px;text-align:center;
-line-height:2;
+.results{
+background:white;
+border-radius:15px;
+padding:15px;
+color:#222;
+min-height:250px;
 }
-.search{
-width:100%;max-width:680px;
-display:flex;align-items:center;
-background:#121f34;
-border:1px solid #294365;
-border-radius:17px;padding:7px;
+.gsc-control-cse{
+border:0!important;
+background:white!important;
 }
-.search:focus-within{
-border-color:#299cff;
-box-shadow:0 0 25px #168cff20;
+.gsc-control-cse *{
+font-family:Tahoma,Arial!important;
 }
-.search input{
-flex:1;min-width:0;
-background:none;border:0;outline:0;
-color:white;padding:15px;
-font-size:15px;font-family:inherit;
-}
-.search input::placeholder{color:#7186a3}
-.search button{
-border:0;background:#168cff;
-color:#fff;padding:14px 23px;
-border-radius:12px;font-family:inherit;
-cursor:pointer;font-weight:bold;
-}
-.categories{
-display:flex;gap:10px;
-flex-wrap:wrap;justify-content:center;
-margin-top:22px;
-}
-.categories button{
-background:#101e32;color:#a9c4e6;
-border:1px solid #253b59;
-padding:10px 17px;border-radius:10px;
-cursor:pointer;font-family:inherit;
-}
-.categories button.active{
-background:#153e69;color:#70bdff;
-border-color:#299cff;
-}
-.section{
-width:100%;max-width:750px;
-margin-top:65px;
-}
-.section-title{
-font-size:15px;color:#dceaff;
-margin-bottom:20px;
-}
-.grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-}
-.site{
-text-decoration:none;color:#dceaff;
-background:#101d30;
-border:1px solid #1d3451;
-border-radius:14px;padding:17px 8px;
-text-align:center;transition:.2s;
-}
-.site:hover{
-border-color:#299cff;
-transform:translateY(-4px);
-background:#142943;
-}
-.site i{font-style:normal;font-size:25px;display:block;margin-bottom:10px}
-.site span{font-size:12px}
 footer{
-border-top:1px solid #1b2b43;
-text-align:center;padding:22px;
-font-size:12px;color:#7186a3;
+text-align:center;
+padding:25px;
+color:#8293aa;
+font-size:12px;
 }
 footer b{color:#299cff}
-@media(max-width:500px){
-header{padding:0 15px}
-.grid{grid-template-columns:repeat(2,1fr)}
-main{padding-top:65px}
-.search button{padding:13px}
+@media(max-width:600px){
+main{margin:25px auto}
+.logo{font-size:29px}
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="brand">🎮 ABDULLAH <b>GAMER</b></div>
-<div class="status">● جستجوگر آنلاین</div>
+🎮 ABDULLAH GAMER
 </header>
 
 <main>
-<div class="badge">✦ موتور جستجوی عبدالله گیمر</div>
 
-<h1>دنیای خودت را <span>پیدا کن</span></h1>
-
-<p class="description">
-به سرچ عبدالله گیمر خوش آمدید<br>
-هر چیزی را که می‌خواهید جستجو کنید.
-</p>
-
-<form class="search" id="form">
-<input id="q" type="search"
-placeholder="نام سایت یا عبارت موردنظر..."
-autocomplete="off" required>
-<button type="submit">جستجو ←</button>
-</form>
-
-<div class="categories">
-<button class="active" onclick="go('web',this)">🌐 وب</button>
-<button onclick="go('images',this)">🖼 تصاویر</button>
-<button onclick="go('videos',this)">▶ ویدئو</button>
-<button onclick="go('news',this)">📰 اخبار</button>
+<div class="logo">
+ABDULLAH <span>SEARCH</span>
 </div>
 
-<div class="section">
-<div class="section-title">✦ سایت‌های پرطرفدار</div>
-<div class="grid">
-<a class="site" href="https://www.youtube.com"><i>▶️</i><span>یوتیوب</span></a>
-<a class="site" href="https://www.aparat.com"><i>📺</i><span>آپارات</span></a>
-<a class="site" href="https://github.com"><i>💻</i><span>گیت‌هاب</span></a>
-<a class="site" href="https://rubika.ir"><i>💬</i><span>روبیکا</span></a>
-<a class="site" href="https://www.wikipedia.org"><i>📚</i><span>ویکی‌پدیا</span></a>
-<a class="site" href="https://www.digikala.com"><i>🛍️</i><span>دیجی‌کالا</span></a>
-<a class="site" href="https://www.instagram.com"><i>📷</i><span>اینستاگرام</span></a>
-<a class="site" href="https://www.bing.com"><i>🌐</i><span>بینگ</span></a>
+<div class="desc">
+موتور جستجوی عبدالله گیمر
+<br>
+هر چیزی را در اینترنت پیدا کن!
 </div>
+
+<div class="results">
+<div class="gcse-search"></div>
 </div>
+
 </main>
 
 <footer>
-ساخته شده توسط <b>عبدالله ظاهری</b> ❤️
+ساخته شده توسط <b>عبدالله ظاهری</b>
 <br><br>
 ABDULLAH GAMER SEARCH © 2026
 </footer>
 
-<script>
-let mode="web";
-function go(type,button){
-mode=type;
-document.querySelectorAll(".categories button")
-.forEach(b=>b.classList.remove("active"));
-button.classList.add("active");
-}
-document.getElementById("form").addEventListener("submit",function(e){
-e.preventDefault();
-let q=document.getElementById("q").value.trim();
-if(!q)return;
-let url="https://www.google.com/search?q="+encodeURIComponent(q);
-if(mode==="images")url="https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q);
-if(mode==="videos")url="https://www.google.com/search?tbm=vid&q="+encodeURIComponent(q);
-if(mode==="news")url="https://www.google.com/search?tbm=nws&q="+encodeURIComponent(q);
-window.location.href=url;
-});
-</script>
-
 </body>
-  </html>
+</html>
