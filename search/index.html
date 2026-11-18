@@ -2,244 +2,198 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>سرچ عبدالله گیمر</title>
-
 <style>
 *{box-sizing:border-box}
 body{
-margin:0;
-font-family:Tahoma,Arial;
-background:#fff;
-color:#202124;
+margin:0;background:#080e1c;color:#fff;
+font-family:Tahoma,Arial,sans-serif;
 }
 header{
-height:65px;
-display:flex;
-align-items:center;
+height:75px;padding:0 6%;
+display:flex;align-items:center;
 justify-content:space-between;
-padding:0 25px;
+border-bottom:1px solid #1c2c46;
+background:#0b1425;
 }
-.brand{
-font-size:17px;
-font-weight:bold;
-color:#4285f4;
-}
-.top{
-color:#555;
-font-size:13px;
-}
+.brand{font-size:19px;font-weight:bold;color:#46aaff}
+.brand b{color:#fff}
+.status{font-size:12px;color:#8ea6c7}
 main{
-min-height:75vh;
-display:flex;
-align-items:center;
+min-height:calc(100vh - 140px);
+display:flex;align-items:center;
 flex-direction:column;
-justify-content:center;
-padding:20px;
+padding:90px 18px 45px;
 }
-.logo{
-font-size:clamp(35px,8vw,65px);
-font-weight:bold;
-letter-spacing:-3px;
-margin-bottom:12px;
+.badge{
+border:1px solid #234b78;
+background:#102746;
+color:#64baff;
+padding:9px 18px;border-radius:30px;
+font-size:12px;margin-bottom:25px;
 }
-.logo span:nth-child(1){color:#4285f4}
-.logo span:nth-child(2){color:#ea4335}
-.logo span:nth-child(3){color:#fbbc05}
-.logo span:nth-child(4){color:#4285f4}
-.logo span:nth-child(5){color:#34a853}
-.logo span:nth-child(6){color:#ea4335}
-.subtitle{
-font-size:13px;
-color:#777;
-margin-bottom:30px;
+h1{
+font-size:clamp(32px,7vw,58px);
+margin:0 0 14px;text-align:center;
+}
+h1 span{color:#299cff}
+.description{
+color:#8ea2bd;font-size:14px;
+margin-bottom:35px;text-align:center;
+line-height:2;
 }
 .search{
-width:100%;
-max-width:620px;
-height:55px;
-border:1px solid #dfe1e5;
-border-radius:30px;
-display:flex;
-align-items:center;
-padding:0 18px;
-box-shadow:0 2px 7px #00000012;
+width:100%;max-width:680px;
+display:flex;align-items:center;
+background:#121f34;
+border:1px solid #294365;
+border-radius:17px;padding:7px;
 }
-.search:hover,.search:focus-within{
-box-shadow:0 2px 10px #00000025;
+.search:focus-within{
+border-color:#299cff;
+box-shadow:0 0 25px #168cff20;
 }
 .search input{
-flex:1;
-min-width:0;
-border:0;
-outline:0;
-font-size:16px;
-padding:10px;
-background:transparent;
+flex:1;min-width:0;
+background:none;border:0;outline:0;
+color:white;padding:15px;
+font-size:15px;font-family:inherit;
 }
+.search input::placeholder{color:#7186a3}
 .search button{
-border:0;
-background:none;
-font-size:21px;
-cursor:pointer;
+border:0;background:#168cff;
+color:#fff;padding:14px 23px;
+border-radius:12px;font-family:inherit;
+cursor:pointer;font-weight:bold;
 }
-.buttons{
-display:flex;
-gap:12px;
-margin-top:25px;
-flex-wrap:wrap;
-justify-content:center;
+.categories{
+display:flex;gap:10px;
+flex-wrap:wrap;justify-content:center;
+margin-top:22px;
 }
-.buttons button{
-background:#f8f9fa;
-border:1px solid #f8f9fa;
-padding:12px 20px;
-border-radius:5px;
-cursor:pointer;
-color:#333;
-font-family:Tahoma;
+.categories button{
+background:#101e32;color:#a9c4e6;
+border:1px solid #253b59;
+padding:10px 17px;border-radius:10px;
+cursor:pointer;font-family:inherit;
 }
-.buttons button:hover{
-border-color:#dadce0;
+.categories button.active{
+background:#153e69;color:#70bdff;
+border-color:#299cff;
 }
-.shortcuts{
-width:100%;
-max-width:650px;
-margin-top:55px;
+.section{
+width:100%;max-width:750px;
+margin-top:65px;
+}
+.section-title{
+font-size:15px;color:#dceaff;
+margin-bottom:20px;
+}
+.grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:15px;
+gap:12px;
 }
-.shortcut{
-text-decoration:none;
-color:#444;
-display:flex;
-align-items:center;
-flex-direction:column;
-gap:10px;
-font-size:12px;
-padding:15px 5px;
-border-radius:12px;
+.site{
+text-decoration:none;color:#dceaff;
+background:#101d30;
+border:1px solid #1d3451;
+border-radius:14px;padding:17px 8px;
+text-align:center;transition:.2s;
 }
-.shortcut:hover{background:#f1f3f4}
-.icon{
-width:43px;
-height:43px;
-border-radius:50%;
-background:#f1f3f4;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:20px;
+.site:hover{
+border-color:#299cff;
+transform:translateY(-4px);
+background:#142943;
 }
+.site i{font-style:normal;font-size:25px;display:block;margin-bottom:10px}
+.site span{font-size:12px}
 footer{
-background:#f2f2f2;
-padding:22px;
-text-align:center;
-font-size:12px;
-color:#777;
+border-top:1px solid #1b2b43;
+text-align:center;padding:22px;
+font-size:12px;color:#7186a3;
 }
-@media(max-width:450px){
-.shortcuts{grid-template-columns:repeat(3,1fr)}
-.logo{letter-spacing:-2px}
+footer b{color:#299cff}
+@media(max-width:500px){
+header{padding:0 15px}
+.grid{grid-template-columns:repeat(2,1fr)}
+main{padding-top:65px}
+.search button{padding:13px}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-<div class="brand">🎮 ABDULLAH GAMER</div>
-<div class="top">جستجوگر اینترنتی</div>
+<div class="brand">🎮 ABDULLAH <b>GAMER</b></div>
+<div class="status">● جستجوگر آنلاین</div>
 </header>
 
 <main>
+<div class="badge">✦ موتور جستجوی عبدالله گیمر</div>
 
-<div class="logo">
-<span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
-</div>
+<h1>دنیای خودت را <span>پیدا کن</span></h1>
 
-<div class="subtitle">خوش آمدید به سرچ عبدالله گیمر</div>
+<p class="description">
+به سرچ عبدالله گیمر خوش آمدید<br>
+هر چیزی را که می‌خواهید جستجو کنید.
+</p>
 
-<form class="search" id="searchForm">
-<button type="submit">🔍</button>
-<input id="query" type="search"
-placeholder="در اینترنت جستجو کنید..."
+<form class="search" id="form">
+<input id="q" type="search"
+placeholder="نام سایت یا عبارت موردنظر..."
 autocomplete="off" required>
+<button type="submit">جستجو ←</button>
 </form>
 
-<div class="buttons">
-<button onclick="searchGoogle()">جستجوی گوگل</button>
-<button onclick="searchImages()">جستجوی تصاویر</button>
-<button onclick="searchVideos()">جستجوی ویدئو</button>
+<div class="categories">
+<button class="active" onclick="go('web',this)">🌐 وب</button>
+<button onclick="go('images',this)">🖼 تصاویر</button>
+<button onclick="go('videos',this)">▶ ویدئو</button>
+<button onclick="go('news',this)">📰 اخبار</button>
 </div>
 
-<div class="shortcuts">
-
-<a class="shortcut" href="https://www.youtube.com">
-<div class="icon">▶️</div>یوتیوب
-</a>
-
-<a class="shortcut" href="https://www.aparat.com">
-<div class="icon">📺</div>آپارات
-</a>
-
-<a class="shortcut" href="https://github.com">
-<div class="icon">💻</div>گیت‌هاب
-</a>
-
-<a class="shortcut" href="https://rubika.ir">
-<div class="icon">💬</div>روبیکا
-</a>
-
-<a class="shortcut" href="https://www.wikipedia.org">
-<div class="icon">📚</div>ویکی‌پدیا
-</a>
-
-<a class="shortcut" href="https://www.digikala.com">
-<div class="icon">🛒</div>دیجی‌کالا
-</a>
-
-<a class="shortcut" href="https://www.instagram.com">
-<div class="icon">📷</div>اینستاگرام
-</a>
-
-<a class="shortcut" href="https://www.bing.com">
-<div class="icon">🌐</div>بینگ
-</a>
-
+<div class="section">
+<div class="section-title">✦ سایت‌های پرطرفدار</div>
+<div class="grid">
+<a class="site" href="https://www.youtube.com"><i>▶️</i><span>یوتیوب</span></a>
+<a class="site" href="https://www.aparat.com"><i>📺</i><span>آپارات</span></a>
+<a class="site" href="https://github.com"><i>💻</i><span>گیت‌هاب</span></a>
+<a class="site" href="https://rubika.ir"><i>💬</i><span>روبیکا</span></a>
+<a class="site" href="https://www.wikipedia.org"><i>📚</i><span>ویکی‌پدیا</span></a>
+<a class="site" href="https://www.digikala.com"><i>🛍️</i><span>دیجی‌کالا</span></a>
+<a class="site" href="https://www.instagram.com"><i>📷</i><span>اینستاگرام</span></a>
+<a class="site" href="https://www.bing.com"><i>🌐</i><span>بینگ</span></a>
+</div>
 </div>
 </main>
 
 <footer>
-ساخته شده توسط عبدالله ظاهری ❤️
+ساخته شده توسط <b>عبدالله ظاهری</b> ❤️
 <br><br>
-© 2026 Abdullah Gamer Search
+ABDULLAH GAMER SEARCH © 2026
 </footer>
 
 <script>
-const input=document.getElementById("query");
-
-function searchGoogle(){
-let q=input.value.trim();
-if(q) location.href="https://www.google.com/search?q="+encodeURIComponent(q);
+let mode="web";
+function go(type,button){
+mode=type;
+document.querySelectorAll(".categories button")
+.forEach(b=>b.classList.remove("active"));
+button.classList.add("active");
 }
-
-function searchImages(){
-let q=input.value.trim();
-if(q) location.href="https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q);
-}
-
-function searchVideos(){
-let q=input.value.trim();
-if(q) location.href="https://www.google.com/search?tbm=vid&q="+encodeURIComponent(q);
-}
-
-document.getElementById("searchForm").addEventListener("submit",function(e){
+document.getElementById("form").addEventListener("submit",function(e){
 e.preventDefault();
-searchGoogle();
+let q=document.getElementById("q").value.trim();
+if(!q)return;
+let url="https://www.google.com/search?q="+encodeURIComponent(q);
+if(mode==="images")url="https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q);
+if(mode==="videos")url="https://www.google.com/search?tbm=vid&q="+encodeURIComponent(q);
+if(mode==="news")url="https://www.google.com/search?tbm=nws&q="+encodeURIComponent(q);
+window.location.href=url;
 });
 </script>
 
 </body>
-</html>
+  </html>
