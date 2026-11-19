@@ -1,0 +1,77 @@
+*{
+box-sizing:border-box;
+}
+body{
+margin:0;
+background:#080d19;
+color:white;
+font-family:tahoma;
+}
+header{
+padding:23px;
+background:#111c30;
+text-align:center;
+border-bottom:1px solid #263b58;
+}
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#22caff;
+}
+.logo span{
+color:white;
+}
+main{
+max-width:650px;
+margin:65px auto;
+padding:20px;
+text-align:center;
+}
+h1{
+font-size:30px;
+}
+p{
+color:#aabbd0;
+line-height:2;
+}
+.upload-box{
+margin-top:35px;
+background:#111d32;
+border:2px dashed #258dff;
+border-radius:20px;
+padding:35px 20px;
+}
+.icon{
+font-size:65px;
+}
+input{
+display:block;
+width:100%;
+margin:25px 0;
+padding:14px;
+background:#1b2b45;
+color:white;
+border-radius:10px;
+}
+button{
+width:100%;
+padding:16px;
+background:linear-gradient(90deg,#00bfff,#365cff);
+border:0;
+border-radius:12px;
+color:white;
+font-size:17px;
+cursor:pointer;
+}
+#status,#result{
+margin-top:20px;
+overflow-wrap:anywhere;
+}
+#result a{
+color:#35d5ff;
+}
+footer{
+text-align:center;
+padding:30px;
+color:#8193ac;
+}
