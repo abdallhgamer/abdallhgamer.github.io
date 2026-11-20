@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>روبیکا بات‌ساز</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#090d20;
+ color:white;
+ font-family:Tahoma;
+}
+header{
+ background:#151936;
+ padding:20px;
+ color:#b69cff;
+ font-size:22px;
+ font-weight:bold;
+}
+main{max-width:750px;margin:auto;padding:18px}
+.hero{
+ background:linear-gradient(135deg,#713cff,#087de8);
+ padding:35px 20px;
+ border-radius:22px;
+ text-align:center;
+ margin-top:20px;
+}
+.card{
+ background:#171e3c;
+ padding:20px;
+ border-radius:17px;
+ margin-top:18px;
+ border:1px solid #303c68;
+}
+h2{color:#b99cff;font-size:19px}
+input,textarea{
+ width:100%;
+ padding:14px;
+ margin:10px 0;
+ border-radius:10px;
+ border:1px solid #43517d;
+ background:#0b1430;
+ color:white;
+ font-family:Tahoma;
+}
+button{
+ background:linear-gradient(90deg,#743cff,#2785ff);
+ color:white;
+ border:0;
+ border-radius:10px;
+ padding:14px 20px;
+ width:100%;
+ font-size:15px;
+}
+.item{
+ background:#222d54;
+ padding:15px;
+ margin:10px 0;
+ border-radius:12px;
+}
+footer{text-align:center;padding:30px;color:#8795b5}
+</style>
+</head>
+<body>
+
+<header>🤖 روبیکا بات‌ساز</header>
+
+<main>
+<section class="hero">
+<h1>ساخت ربات روبیکا</h1>
+<p>ربات خودت را بدون برنامه‌نویسی مدیریت کن.</p>
+</section>
+
+<div class="card">
+<h2>🔗 اتصال ربات</h2>
+<input id="token" type="password" placeholder="توکن ربات">
+<button onclick="connect()">اتصال</button>
+<p id="status"></p>
+</div>
+
+<div class="card">
+<h2>👋 پیام خوش‌آمدگویی</h2>
+<textarea id="welcome" placeholder="پیام خوش‌آمدگویی..."></textarea>
+<button onclick="save()">ذخیره پیام</button>
+<p id="saved"></p>
+</div>
+
+<div class="card">
+<h2>💬 پاسخ خودکار</h2>
+<input id="word" placeholder="کلمه موردنظر">
+<textarea id="reply" placeholder="پاسخ ربات"></textarea>
+<button onclick="add()">افزودن پاسخ</button>
+<div id="list"></div>
+</div>
+
+</main>
+
+<footer>روبیکا بات‌ساز | ساخته شده با ❤️</footer>
+
+<script>
+function connect(){
+ document.getElementById('status').innerText=
+ 'برای اتصال واقعی، سرور امن موردنیاز است.';
+}
+function save(){
+ localStorage.setItem('welcome',
+ document.getElementById('welcome').value);
+ document.getElementById('saved').innerText='ذخیره شد ✅';
+}
+function add(){
+ let w=document.getElementById('word').value.trim();
+ let r=document.getElementById('reply').value.trim();
+ if(!w||!r)return alert('هر دو قسمت را پر کن');
+ let a=JSON.parse(localStorage.getItem('replies')||'[]');
+ a.push({w,r});
+ localStorage.setItem('replies',JSON.stringify(a));
+ show();
+}
+function show(){
+ let a=JSON.parse(localStorage.getItem('replies')||'[]');
+ document.getElementById('list').innerHTML='';
+ a.forEach(x=>{
+ let d=document.createElement('div');
+ d.className='item';
+ d.textContent=x.w+' ← '+x.r;
+ document.getElementById('list').appendChild(d);
+ });
+}
+show();
+</script>
+</body>
+</html>
