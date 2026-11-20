@@ -1,20 +1,248 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>عبدالله آپلود</title>
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>عبدالله گیمر | آپلود فایل</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Tahoma,Arial;
+ background:#f5f7fc;
+ color:#202b40;
+ transition:.3s;
+}
+body.dark{background:#0b1220;color:#f1f5f9}
+header{
+ background:white;
+ border-bottom:1px solid #e5e7eb;
+ padding:17px;
+ text-align:center;
+ position:sticky;top:0;
+ z-index:5;
+}
+.dark header{background:#111c30;border-color:#263449}
+.logo{font-size:25px;font-weight:bold;color:#6366f1}
+.container{max-width:850px;margin:40px auto;padding:15px}
+h1{text-align:center;font-size:25px}
+.subtitle{text-align:center;color:#8992a5;margin-bottom:35px}
+.upload{
+ background:white;
+ border:2px dashed #a5b4fc;
+ border-radius:20px;
+ padding:55px 15px;
+ text-align:center;
+ cursor:pointer;
+ transition:.2s;
+}
+.dark .upload,.dark .box{background:#111c30;border-color:#35435c}
+.upload:hover{border-color:#6366f1;background:#eef2ff}
+.dark .upload:hover{background:#17243b}
+.icon{font-size:55px;color:#6366f1}
+.upload p{line-height:2}
+button{
+ border:0;
+ background:#6366f1;
+ color:white;
+ padding:12px 22px;
+ border-radius:10px;
+ cursor:pointer;
+ font-size:14px;
+}
+button:hover{background:#4f46e5}
+#files{display:none}
+.box{
+ background:white;
+ border-radius:16px;
+ padding:20px;
+ margin-top:22px;
+ box-shadow:0 5px 20px #00000008;
+}
+.file{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:14px 0;
+ border-bottom:1px solid #eee;
+}
+.file:last-child{border:0}
+.fileicon{font-size:27px}
+.filename{flex:1;overflow-wrap:anywhere;font-size:13px}
+.progress{
+ height:6px;
+ background:#e5e7eb;
+ border-radius:10px;
+ margin-top:8px;
+ overflow:hidden;
+}
+.progress span{
+ display:block;height:100%;
+ background:#6366f1;width:0;
+ transition:width .3s;
+}
+.link{font-size:11px;color:#6366f1;overflow-wrap:anywhere}
+.actions{display:flex;gap:7px;flex-wrap:wrap}
+.actions button{padding:7px 10px;font-size:11px}
+.remove{background:#ef4444}
+footer{text-align:center;padding:30px;color:#999;font-size:12px}
+.topbtn{position:absolute;left:15px;top:15px;background:#eef2ff;color:#555}
+.dark .topbtn{background:#263449;color:white}
+</style>
 </head>
-<body><header>
-<div class="logo">ABDULLAH <span>UPLOAD</span></div>
-</header><main>
-<h1>آپلود فایل آنلاین</h1>
-<p>فایل خود را انتخاب کنید و لینک دانلود بگیرید.</p><div class="upload-box">
-<div class="icon">☁️</div>
-<h2>انتخاب فایل</h2><input type="file" id="file"><button id="uploadBtn">شروع آپلود</button>
+<body>
 
-<div id="status"></div>
-<div id="result"></div>
+<header>
+ <div class="logo">🚀 عبدالله گیمر</div>
+ <button class="topbtn" onclick="theme()">🌙</button>
+</header>
+
+<main class="container">
+
+<h1>فایل‌های خود را آپلود کنید</h1>
+<p class="subtitle">فضای آپلود فایل، سریع و آسان</p>
+
+<div class="upload" onclick="document.getElementById('files').click()"
+ondragover="event.preventDefault()"
+ondrop="dropFiles(event)">
+
+ <div class="icon">☁️</div>
+ <h3>فایل‌های خود را اینجا انتخاب کنید</h3>
+ <p>یا برای انتخاب فایل ضربه بزنید</p>
+ <button type="button">انتخاب فایل</button>
+ <p style="font-size:11px;color:#999">
+ امکان انتخاب چند فایل هم‌زمان
+ </p>
 </div>
-</main><footer>ساخته شده توسط عبدالله ظاهری ❤️</footer><script src="app.js"></script></body>
-</html>
+
+<input id="files" type="file" multiple>
+
+<div class="box">
+ <h3>📁 آرشیو فایل‌ها</h3>
+ <div id="list">
+ <p style="color:#999;text-align:center">هنوز فایلی انتخاب نشده است.</p>
+ </div>
+</div>
+
+</main>
+
+<footer>
+© ۱۴۰۵ عبدالله گیمر | تمامی حقوق محفوظ است
+</footer>
+
+<script>
+const input=document.getElementById('files');
+const list=document.getElementById('list');
+let selected=[];
+
+input.addEventListener('change',()=>{
+ addFiles(input.files);
+ input.value='';
+});
+
+function dropFiles(e){
+ e.preventDefault();
+ addFiles(e.dataTransfer.files);
+}
+
+function addFiles(files){
+ for(const file of files){
+  if(selected.some(x=>x.file.name===file.name && x.file.size===file.size)){
+   continue;
+  }
+  selected.push({file,url:URL.createObjectURL(file)});
+ }
+ render();
+}
+
+function render(){
+ list.innerHTML='';
+
+ if(!selected.length){
+  list.innerHTML='<p style="color:#999;text-align:center">هنوز فایلی انتخاب نشده است.</p>';
+  return;
+ }
+
+ selected.forEach((item,index)=>{
+  const file=item.file;
+  const div=document.createElement('div');
+  div.className='file';
+
+  const icon=document.createElement('span');
+  icon.className='fileicon';
+  icon.textContent=file.type.startsWith('image/')?'🖼️':
+  file.type.startsWith('video/')?'🎬':
+  file.type.startsWith('audio/')?'🎵':'📄';
+
+  const info=document.createElement('div');
+  info.className='filename';
+
+  const name=document.createElement('b');
+  name.textContent=file.name;
+
+  const size=document.createElement('div');
+  size.style.color='#999';
+  size.style.marginTop='5px';
+  size.textContent=formatSize(file.size);
+
+  const progress=document.createElement('div');
+  progress.className='progress';
+  const bar=document.createElement('span');
+  bar.style.width='100%';
+  progress.appendChild(bar);
+
+  const actions=document.createElement('div');
+  actions.className='actions';
+
+  const download=document.createElement('a');
+  download.href=item.url;
+  download.download=file.name;
+  download.textContent='⬇️ دانلود';
+  download.style.cssText='background:#6366f1;color:white;padding:8px;border-radius:8px;text-decoration:none;font-size:11px';
+
+  const copy=document.createElement('button');
+  copy.textContent='📋 کپی لینک';
+  copy.onclick=()=>{
+   if(navigator.clipboard){
+    navigator.clipboard.writeText(item.url)
+    .then(()=>alert('لینک محلی کپی شد'));
+   }else{
+    alert('مرورگر اجازه کپی خودکار نمی‌دهد');
+   }
+  };
+
+  const remove=document.createElement('button');
+  remove.className='remove';
+  remove.textContent='حذف';
+  remove.onclick=()=>{
+   URL.revokeObjectURL(item.url);
+   selected.splice(index,1);
+   render();
+  };
+
+  info.append(name,size,progress);
+  actions.append(download,copy,remove);
+  div.append(icon,info,actions);
+  list.appendChild(div);
+ });
+}
+
+function formatSize(bytes){
+ if(bytes<1024)return bytes+' بایت';
+ if(bytes<1048576)return (bytes/1024).toFixed(1)+' کیلوبایت';
+ return (bytes/1048576).toFixed(2)+' مگابایت';
+}
+
+function theme(){
+ document.body.classList.toggle('dark');
+ localStorage.setItem('theme',
+ document.body.classList.contains('dark')?'dark':'light');
+}
+
+if(localStorage.getItem('theme')==='dark'){
+ document.body.classList.add('dark');
+}
+</script>
+
+</body>
+  </html>
