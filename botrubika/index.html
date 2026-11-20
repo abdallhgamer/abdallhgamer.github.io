@@ -1,134 +1,436 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html><html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>روبیکا بات‌ساز</title>
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6c3ce1">
+<meta name="description" content="عبدالله بات؛ سامانه ساخت و مدیریت ربات روبیکا">
+<title>عبدالله بات | ربات‌ساز روبیکا</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+
+:root{
+ --bg:#0d0b18;
+ --card:#19152a;
+ --text:#ffffff;
+ --muted:#aaa2bf;
+ --primary:#8055ee;
+ --border:#302746;
+ --green:#22c58b;
+}
+[data-theme="light"]{
+ --bg:#f5f3fc;
+ --card:#ffffff;
+ --text:#211936;
+ --muted:#777087;
+ --border:#e7e1f3;
+}
 *{box-sizing:border-box}
 body{
  margin:0;
- background:#090d20;
- color:white;
- font-family:Tahoma;
+ font-family:'Vazirmatn',sans-serif;
+ background:var(--bg);
+ color:var(--text);
+ transition:.3s;
 }
-header{
- background:#151936;
- padding:20px;
- color:#b69cff;
+button,input{font-family:inherit}
+button{cursor:pointer}
+.navbar{
+ height:72px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:0 6%;
+ background:var(--card);
+ border-bottom:1px solid var(--border);
+ position:sticky;
+ top:0;
+ z-index:10;
+}
+.logo{
  font-size:22px;
- font-weight:bold;
+ font-weight:900;
+ color:var(--primary);
 }
-main{max-width:750px;margin:auto;padding:18px}
+.nav-actions{display:flex;gap:10px}
+.btn{
+ border:0;
+ border-radius:12px;
+ padding:11px 20px;
+ background:var(--primary);
+ color:white;
+ font-weight:700;
+}
+.btn-outline{
+ background:transparent;
+ border:1px solid var(--border);
+ color:var(--text);
+}
+.container{
+ width:90%;
+ max-width:1150px;
+ margin:auto;
+}
 .hero{
- background:linear-gradient(135deg,#713cff,#087de8);
- padding:35px 20px;
- border-radius:22px;
+ padding:85px 15px;
  text-align:center;
- margin-top:20px;
+ background:radial-gradient(ellipse at top,#39216b55,transparent 70%);
 }
-.card{
- background:#171e3c;
- padding:20px;
- border-radius:17px;
- margin-top:18px;
- border:1px solid #303c68;
+.badge{
+ display:inline-block;
+ padding:8px 17px;
+ background:#8055ee22;
+ color:#a88bff;
+ border-radius:30px;
+ font-size:13px;
 }
-h2{color:#b99cff;font-size:19px}
-input,textarea{
+.hero h1{
+ font-size:clamp(30px,6vw,52px);
+ font-weight:900;
+ margin:25px 0 15px;
+}
+.hero h1 span{color:var(--primary)}
+.hero p{
+ color:var(--muted);
+ line-height:2;
+ max-width:650px;
+ margin:0 auto 30px;
+}
+.hero-buttons{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:12px;
+}
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:15px;
+ margin-top:35px;
+}
+.stat,.card{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:18px;
+ padding:23px;
+}
+.stat strong{
+ display:block;
+ font-size:26px;
+ color:var(--primary);
+}
+.stat span{color:var(--muted);font-size:13px}
+.section{padding:55px 0}
+.section-title{
+ text-align:center;
+ font-size:27px;
+ margin-bottom:30px;
+}
+.features{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:17px;
+}
+.feature-icon{
+ font-size:30px;
+ margin-bottom:12px;
+}
+.card h3{margin:8px 0}
+.card p{
+ color:var(--muted);
+ font-size:14px;
+ line-height:2;
+}
+.panel{
+ display:none;
+ padding:35px 0 70px;
+}
+.panel.active{display:block}
+.dashboard{
+ display:grid;
+ grid-template-columns:230px 1fr;
+ gap:20px;
+}
+.sidebar{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:18px;
+ padding:15px;
+ height:max-content;
+}
+.side-btn{
+ display:block;
+ width:100%;
+ text-align:right;
+ background:transparent;
+ border:0;
+ padding:14px;
+ color:var(--text);
+ border-radius:10px;
+ font-size:14px;
+}
+.side-btn.active,.side-btn:hover{
+ background:#8055ee22;
+ color:var(--primary);
+}
+.content{
+ min-width:0;
+}
+.input-group{margin:15px 0}
+.input-group label{
+ display:block;
+ margin-bottom:8px;
+ font-size:14px;
+}
+.input-group input{
  width:100%;
  padding:14px;
- margin:10px 0;
- border-radius:10px;
- border:1px solid #43517d;
- background:#0b1430;
- color:white;
- font-family:Tahoma;
+ background:var(--bg);
+ color:var(--text);
+ border:1px solid var(--border);
+ border-radius:11px;
+ outline:none;
 }
-button{
- background:linear-gradient(90deg,#743cff,#2785ff);
- color:white;
- border:0;
- border-radius:10px;
- padding:14px 20px;
- width:100%;
- font-size:15px;
+.input-group input:focus{border-color:var(--primary)}
+.form-card{max-width:550px}
+.bot-list{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+ gap:15px;
+ margin-top:20px;
 }
-.item{
- background:#222d54;
- padding:15px;
- margin:10px 0;
- border-radius:12px;
+.bot-card{
+ background:var(--card);
+ padding:20px;
+ border:1px solid var(--border);
+ border-radius:16px;
 }
-footer{text-align:center;padding:30px;color:#8795b5}
-</style>
-</head>
-<body>
-
-<header>🤖 روبیکا بات‌ساز</header>
-
-<main>
-<section class="hero">
-<h1>ساخت ربات روبیکا</h1>
-<p>ربات خودت را بدون برنامه‌نویسی مدیریت کن.</p>
+.bot-card h3{margin-top:0}
+.empty{
+ text-align:center;
+ color:var(--muted);
+ padding:40px;
+ border:1px dashed var(--border);
+ border-radius:15px;
+}
+.footer{
+ text-align:center;
+ padding:30px;
+ border-top:1px solid var(--border);
+ color:var(--muted);
+ font-size:13px;
+}
+.hidden{display:none!important}
+@media(max-width:700px){
+ .dashboard{grid-template-columns:1fr}
+ .sidebar{display:flex;overflow:auto}
+ .side-btn{white-space:nowrap;width:auto}
+ .stats{grid-template-columns:1fr}
+ .navbar{padding:0 4%}
+ .hero{padding:60px 10px}
+}
+</style></head><body><header class="navbar">
+ <div class="logo">🤖 عبدالله بات</div>
+ <div class="nav-actions">
+  <button class="btn btn-outline" onclick="toggleTheme()">🌙</button>
+  <button class="btn" onclick="showPanel()">ورود به پنل</button>
+ </div>
+</header><main id="home"><section class="hero">
+ <span class="badge">✨ سامانه ساخت ربات روبیکا</span>
+ <h1>ربات خودت را <span>هوشمند بساز!</span></h1>
+ <p>
+ با عبدالله بات می‌توانی ربات‌های خود را مدیریت کنی،
+ دستورات مختلف تعریف کنی و امکانات موردنظرت را به آن‌ها اضافه کنی.
+ </p>
+ <div class="hero-buttons">
+  <button class="btn" onclick="showPanel()">شروع ساخت ربات</button>
+  <button class="btn btn-outline" onclick="document.getElementById('features').scrollIntoView()">امکانات سایت</button>
+ </div> <div class="container stats">
+  <div class="stat"><strong>۲۴/۷</strong><span>مدیریت آنلاین</span></div>
+  <div class="stat"><strong>رایگان</strong><span>شروع استفاده</span></div>
+  <div class="stat"><strong>ساده</strong><span>رابط کاربری فارسی</span></div>
+ </div>
+</section><section class="section container" id="features">
+ <h2 class="section-title">امکانات عبدالله بات</h2>
+ <div class="features">
+  <div class="card">
+   <div class="feature-icon">🤖</div>
+   <h3>مدیریت ربات</h3>
+   <p>افزودن و مدیریت ربات‌های ثبت‌شده.</p>
+  </div>
+  <div class="card">
+   <div class="feature-icon">⚙️</div>
+   <h3>مدیریت دستورات</h3>
+   <p>تعریف دستورات و پاسخ‌های دلخواه.</p>
+  </div>
+  <div class="card">
+   <div class="feature-icon">🛡️</div>
+   <h3>امنیت</h3>
+   <p>طراحی قابلیت‌های امنیتی برای ربات.</p>
+  </div>
+  <div class="card">
+   <div class="feature-icon">📊</div>
+   <h3>داشبورد</h3>
+   <p>نمایش اطلاعات ربات‌های ذخیره‌شده.</p>
+  </div>
+  <div class="card">
+   <div class="feature-icon">💬</div>
+   <h3>پاسخ خودکار</h3>
+   <p>مدیریت پاسخ‌های تعریف‌شده برای دستورات.</p>
+  </div>
+  <div class="card">
+   <div class="feature-icon">🎨</div>
+   <h3>ظاهر زیبا</h3>
+   <p>رابط کاربری مدرن با حالت تاریک و روشن.</p>
+  </div>
+ </div>
 </section>
+</main><section class="panel container" id="panel">
+ <div class="dashboard">  <aside class="sidebar">
+   <button class="side-btn active" onclick="openTab('dashboard',this)">🏠 داشبورد</button>
+   <button class="side-btn" onclick="openTab('addbot',this)">➕ افزودن ربات</button>
+   <button class="side-btn" onclick="openTab('bots',this)">🤖 ربات‌های من</button>
+   <button class="side-btn" onclick="openTab('settings',this)">⚙️ تنظیمات</button>
+   <button class="side-btn" onclick="logout()">🚪 خروج</button>
+  </aside>  <div class="content">   <div id="dashboard" class="tab">
+    <div class="card">
+     <h2>خوش آمدید 👋</h2>
+     <p>به پنل مدیریت عبدالله بات خوش آمدید.</p>
+     <h3>تعداد ربات‌های شما: <span id="botCount">0</span></h3>
+     <button class="btn" onclick="openTab('addbot')">ساخت ربات جدید</button>
+    </div>
+   </div>   <div id="addbot" class="tab hidden">
+    <div class="card form-card">
+     <h2>➕ افزودن ربات جدید</h2>
+     <form id="botForm">
+      <div class="input-group">
+       <label>نام ربات</label>
+       <input id="botName" placeholder="مثلاً ربات عبدالله" required>
+      </div>
+      <div class="input-group">
+       <label>شناسه ربات</label>
+       <input id="botUsername" placeholder="مثلاً AbdullahBot" required>
+      </div>
+      <p style="font-size:12px;color:var(--muted)">
+       این نسخه آزمایشی است. توکن واقعی را در این فرم وارد نکنید.
+      </p>
+      <button class="btn" type="submit">ذخیره ربات</button>
+     </form>
+    </div>
+   </div>   <div id="bots" class="tab hidden">
+    <div class="card">
+     <h2>🤖 ربات‌های من</h2>
+     <div id="botList"></div>
+    </div>
+   </div>   <div id="settings" class="tab hidden">
+    <div class="card">
+     <h2>⚙️ تنظیمات</h2>
+     <p>نام سامانه: عبدالله بات</p>
+     <p>نسخه: 1.0</p>
+     <button class="btn btn-outline" onclick="toggleTheme()">تغییر پوسته</button>
+    </div>
+   </div>  </div>
+ </div>
+</section><footer class="footer">
+ <p>© 2026 عبدالله بات | تمامی حقوق محفوظ است.</p>
+ <p>ساخته شده با ❤️ برای عبدالله ظاهری</p>
+</footer><script>
+const $ = id => document.getElementById(id);
 
-<div class="card">
-<h2>🔗 اتصال ربات</h2>
-<input id="token" type="password" placeholder="توکن ربات">
-<button onclick="connect()">اتصال</button>
-<p id="status"></p>
-</div>
-
-<div class="card">
-<h2>👋 پیام خوش‌آمدگویی</h2>
-<textarea id="welcome" placeholder="پیام خوش‌آمدگویی..."></textarea>
-<button onclick="save()">ذخیره پیام</button>
-<p id="saved"></p>
-</div>
-
-<div class="card">
-<h2>💬 پاسخ خودکار</h2>
-<input id="word" placeholder="کلمه موردنظر">
-<textarea id="reply" placeholder="پاسخ ربات"></textarea>
-<button onclick="add()">افزودن پاسخ</button>
-<div id="list"></div>
-</div>
-
-</main>
-
-<footer>روبیکا بات‌ساز | ساخته شده با ❤️</footer>
-
-<script>
-function connect(){
- document.getElementById('status').innerText=
- 'برای اتصال واقعی، سرور امن موردنیاز است.';
+function toggleTheme(){
+ const current=document.documentElement.getAttribute('data-theme');
+ document.documentElement.setAttribute(
+  'data-theme',
+  current==='light'?'dark':'light'
+ );
+ localStorage.setItem('abd_theme',
+  document.documentElement.getAttribute('data-theme'));
 }
-function save(){
- localStorage.setItem('welcome',
- document.getElementById('welcome').value);
- document.getElementById('saved').innerText='ذخیره شد ✅';
+
+const savedTheme=localStorage.getItem('abd_theme');
+if(savedTheme)document.documentElement.setAttribute('data-theme',savedTheme);
+
+function showPanel(){
+ $('home').style.display='none';
+ $('panel').classList.add('active');
+ window.scrollTo(0,0);
+ renderBots();
 }
-function add(){
- let w=document.getElementById('word').value.trim();
- let r=document.getElementById('reply').value.trim();
- if(!w||!r)return alert('هر دو قسمت را پر کن');
- let a=JSON.parse(localStorage.getItem('replies')||'[]');
- a.push({w,r});
- localStorage.setItem('replies',JSON.stringify(a));
- show();
+
+function logout(){
+ $('panel').classList.remove('active');
+ $('home').style.display='block';
+ window.scrollTo(0,0);
 }
-function show(){
- let a=JSON.parse(localStorage.getItem('replies')||'[]');
- document.getElementById('list').innerHTML='';
- a.forEach(x=>{
- let d=document.createElement('div');
- d.className='item';
- d.textContent=x.w+' ← '+x.r;
- document.getElementById('list').appendChild(d);
+
+function openTab(id,button){
+ document.querySelectorAll('.tab').forEach(t=>t.classList.add('hidden'));
+ $(id).classList.remove('hidden');
+ document.querySelectorAll('.side-btn').forEach(b=>b.classList.remove('active'));
+ if(button)button.classList.add('active');
+ renderBots();
+}
+
+function getBots(){
+ try{return JSON.parse(localStorage.getItem('abd_bots')||'[]')}
+ catch(e){return []}
+}
+
+function saveBots(bots){
+ localStorage.setItem('abd_bots',JSON.stringify(bots));
+}
+
+$('botForm').addEventListener('submit',function(e){
+ e.preventDefault();
+
+ const name=$('botName').value.trim();
+ const username=$('botUsername').value.trim();
+
+ if(!name||!username)return;
+
+ const bots=getBots();
+
+ bots.push({
+  id:Date.now(),
+  name:name,
+  username:username,
+  date:new Date().toLocaleDateString('fa-IR')
+ });
+
+ saveBots(bots);
+ this.reset();
+ renderBots();
+ openTab('bots');
+ alert('ربات با موفقیت در فهرست آزمایشی ذخیره شد.');
+});
+
+function renderBots(){
+ const bots=getBots();
+ $('botCount').textContent=bots.length;
+
+ if(!bots.length){
+  $('botList').innerHTML='<div class="empty">هنوز رباتی اضافه نکرده‌اید.</div>';
+  return;
+ }
+
+ $('botList').innerHTML='<div class="bot-list">'+bots.map(bot=>`
+  <div class="bot-card">
+   <h3>🤖 ${escapeHTML(bot.name)}</h3>
+   <p>شناسه: ${escapeHTML(bot.username)}</p>
+   <p>تاریخ: ${escapeHTML(bot.date)}</p>
+   <button class="btn btn-outline" onclick="deleteBot(${bot.id})">حذف ربات</button>
+  </div>
+ `).join('')+'</div>';
+}
+
+function deleteBot(id){
+ if(!confirm('این ربات آزمایشی حذف شود؟'))return;
+ saveBots(getBots().filter(bot=>bot.id!==id));
+ renderBots();
+}
+
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
  });
 }
-show();
-</script>
-</body>
+</script></body>
 </html>
